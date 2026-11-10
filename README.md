@@ -1,6 +1,6 @@
 # Квестпост — Ребут
 
-Страница: https://maxcuso.github.io/questpost-reboot/
+Страница: https://maxcuso.github.io/reboot/
 
 Автономная копия страницы обновления для GitHub Pages. PHP, Flarum, база данных и сборка не нужны. Все изображения, шрифты и значки находятся в этой папке.
 
@@ -19,7 +19,7 @@
 
 1. Загрузите содержимое этой папки в корень отдельного репозитория, включая `assets` и `.nojekyll`.
 2. В Settings → Pages выберите Deploy from a branch, ветку main и папку / (root).
-3. Дождитесь публикации. Адрес будет вида https://maxcuso.github.io/questpost-reboot/.
+3. Дождитесь публикации. Адрес будет вида https://maxcuso.github.io/reboot/.
 
 Все пути к ресурсам относительные: страница работает и в корне домена, и в подпапке репозитория. Кнопки страницы показывают окошко «Скоро...» и не открывают сайт форума. Обработчик находится в конце `page.js`.
 
@@ -30,7 +30,7 @@
 ## Вставка в тему форума
 
 ```html
-<iframe src="https://maxcuso.github.io/questpost-reboot/" title="Квестпост — Ребут"
+<iframe src="https://maxcuso.github.io/reboot/" title="Квестпост — Ребут"
   style="display:block;width:100%;max-width:700px;height:850px;border:0;margin:0 auto"></iframe>
 ```
 
