@@ -1,0 +1,2922 @@
+/* Собрано из preview/role/style.css. */
+/*
+ * СТРАНИЦА /role — карта оформления
+ *
+ * Все итоговые стили одного элемента находятся рядом, без истории переопределений.
+ * Для копирования блока нужны его HTML-классы, раздел CSS и общие переменные (01–04).
+ * Примеры и зависимости: EDITING.md. JavaScript не задаёт размеры блоков.
+ */
+
+/* ==========================================================================
+   01. Палитра и размеры
+   Меняйте переменные здесь: цвета темы, ширина страницы, отступ от края.
+   ========================================================================== */
+.RpGuide {
+  color-scheme: light;
+  --role-bg: #f9fafb;
+  --role-surface: #fff;
+  --role-text: #273240;
+  --role-muted: #7b7d7e;
+  --role-line: #e4e8ed;
+  --role-soft: #eef1f5;
+  --role-primary: #45698d;
+  --role-violet: #8054bd;
+  --role-teal: #228977;
+  --role-blue: #367cc4;
+  --role-ember: #cc6245;
+  --role-red: #b74747;
+  --role-earth: #a47546;
+  --role-forest: #4b8b56;
+  --role-air: #3095a8;
+  --role-amber: #b78321;
+
+/* Геометрия: страница, единая ширина документов и доля иллюстраций в колонках. */
+  --role-width: 1160px;
+  --role-document-width: 860px;
+  --role-media-width: 350px;
+  --role-gutter: 36px;
+  --role-radius: 16px;
+}
+
+.RpGuide[data-theme="dark"] {
+  color-scheme: dark;
+  --role-bg: #181b20;
+  --role-surface: #22262d;
+  --role-text: #edf0f5;
+  --role-muted: #b3b4b6;
+  --role-line: #333943;
+  --role-soft: #2b313b;
+  --role-primary: #8bb0d7;
+  --role-violet: #b78aee;
+  --role-teal: #58c3ad;
+  --role-blue: #78b4ee;
+  --role-ember: #f09a77;
+  --role-red: #ef9090;
+  --role-earth: #d4ab7c;
+  --role-forest: #90c47a;
+  --role-air: #6ac9d9;
+  --role-amber: #e7b85f;
+}
+
+/* ==========================================================================
+   02. Шрифты
+   Jost — Jost для заголовков; Role Icons — символы Font Awesome.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Guide Jost";
+  src: url("./assets/fonts/Jost-400-Book.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Jost";
+  src: url("./assets/fonts/Jost-500-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Jost";
+  src: url("./assets/fonts/Jost-700-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Jost";
+  src: url("./assets/fonts/Jost-400-BookItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Guide Oracle";
+  src: url("./assets/fonts/VALVEOracle-Thin.woff2") format("woff2"), url("./assets/fonts/VALVEOracle-Thin.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Oracle";
+  src: url("./assets/fonts/VALVEOracle-Medium.woff2") format("woff2"), url("./assets/fonts/VALVEOracle-Medium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Oracle";
+  src: url("./assets/fonts/VALVEOracle-SemiBold.woff2") format("woff2"), url("./assets/fonts/VALVEOracle-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Guide Pulp";
+  src: url("./assets/fonts/VALVEPulp-Bold.woff2") format("woff2"), url("./assets/fonts/VALVEPulp-Bold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   03. Общие правила
+   Сброс отступов, основной текст, ссылки, фокус клавиатуры и контейнер страницы.
+   ========================================================================== */
+.RpGuide * {
+  box-sizing: border-box;
+}
+
+html.GuidePage {
+  scroll-behavior: smooth;
+  scroll-padding-top: 30px;
+}
+
+.RpGuide {
+  margin: 0;
+  color: var(--role-text);
+  background: var(--role-bg);
+  font: 15px / 1.55 Arial, sans-serif;
+}
+
+.RpGuide button {
+  -webkit-tap-highlight-color: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.RpGuide a {
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+.RpGuide h1 {
+  margin: 0;
+}
+
+.RpGuide h2 {
+  margin: 0;
+}
+
+.RpGuide h3 {
+  margin: 0;
+}
+
+.RpGuide p {
+  margin: 0;
+}
+
+.RpGuide button:disabled {
+  cursor: default;
+}
+
+.RpGuide :focus-visible {
+  outline: rgb(121, 153, 191) solid 3px;
+  outline-offset: 5px;
+}
+
+.RpGuide .Container {
+  width: min(var(--role-width),calc(100% - var(--role-gutter) * 2));
+  margin-inline: auto;
+}
+
+.RpGuide [data-accent="ember"] {
+  --role-accent: var(--role-ember);
+}
+
+.RpGuide [data-accent="red"] {
+  --role-accent: var(--role-red);
+}
+
+.RpGuide [data-accent="water"] {
+  --role-accent: var(--role-blue);
+}
+
+.RpGuide [data-accent="earth"] {
+  --role-accent: var(--role-earth);
+}
+
+.RpGuide [data-accent="air"] {
+  --role-accent: var(--role-teal);
+}
+
+.RpGuide [data-accent="forest"] {
+  --role-accent: var(--role-forest);
+}
+
+.RpGuide [data-accent="gold"] {
+  --role-accent: var(--role-amber);
+}
+
+.RpGuide [data-accent="violet"] {
+  --role-accent: var(--role-violet);
+}
+
+/* ==========================================================================
+   04. Общие кнопки и иконки
+   Button — текстовая кнопка; IconButton — круглая кнопка с иконкой.
+   ========================================================================== */
+.RpGuide .Icon {
+  display: inline-block;
+  flex-shrink: 0;
+  font-style: normal;
+  line-height: 1;
+}
+
+.RpGuide .IconButton {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--role-line);
+  border-radius: 50%;
+  color: var(--role-text);
+  background: var(--role-surface);
+  font-size: 13px;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.RpGuide .IconButton:hover:not(:disabled) {
+  background: var(--role-soft);
+}
+
+.RpGuide .IconButton:disabled {
+  opacity: 0.3;
+}
+
+.RpGuide .Button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+  min-height: 47px;
+  padding: 0 23px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.RpGuide .Button:hover {
+  transform: translateY(-2px);
+}
+
+.RpGuide .Button--gold {
+  background: var(--role-violet);
+  color: var(--role-surface);
+  box-shadow: rgba(0, 0, 0, 0.133) 0 6px 22px;
+}
+
+.RpGuide .Button--ghost {
+  color: rgb(246, 244, 239);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: transparent;
+}
+
+.RpGuide .Button--primary {
+  color: white;
+  background: rgb(69, 105, 141);
+}
+
+/* ==========================================================================
+   05. Верхняя панель
+   Логотип, навигация и переключатель темы.
+   ========================================================================== */
+.RpGuide .SiteHeader {
+  background: var(--role-surface);
+  border-bottom: 1px solid var(--role-line);
+}
+
+.RpGuide .SiteHeader-inner {
+  height: 76px;
+  width: min(var(--role-width),calc(100% - var(--role-gutter) * 2));
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.RpGuide .Brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 20px;
+  letter-spacing: -0.7px;
+}
+
+.RpGuide .Brand-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  color: white;
+  background: rgb(69, 105, 141);
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.RpGuide .Brand-mark span {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--role-violet);
+  border: 2px solid var(--role-surface);
+}
+
+.RpGuide .SiteNav {
+  display: flex;
+  gap: 27px;
+  font-size: 13px;
+  color: var(--role-muted);
+}
+
+.RpGuide .SiteNav a:hover {
+  color: var(--role-text);
+}
+
+.RpGuide .SiteActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+.RpGuide .ForumLink {
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--role-primary);
+}
+
+/* ==========================================================================
+   06. Вступительный баннер
+   Высота — Hero-inner; заголовок — Hero h1; наклонная подпись — Hero-genre.
+   ========================================================================== */
+.RpGuide .Hero {
+  color: rgb(255, 255, 255);
+  background-image:
+    linear-gradient(rgba(40, 5, 50, 0.58), rgba(19, 17, 31, 0.38)),
+    url("./assets/hero-background.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  letter-spacing: 0px;
+}
+
+.RpGuide .Hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding-block: 46px;
+}
+
+.RpGuide .Hero-copy {
+  padding: 100px 0 0 0;
+  width: 100%;
+  min-width: 0;
+  max-width: 800px;
+  text-align: center;
+}
+
+.RpGuide .Hero-genre {
+  display: block;
+  width: fit-content;
+  margin: 0px 20px 0 auto;
+  border: 0;
+  letter-spacing: 0.3px;
+  color: var(--role-surface);
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+  padding: 10px 18px;
+  transform: rotate(-1.5deg);
+  font-weight: 900;
+  font-size: 11px;
+}
+
+.RpGuide .Hero h1 {
+  margin: 0;
+  line-height: 1.05;
+  color: rgb(255, 244, 220);
+  font-family: "Guide Jost", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: clamp(48px, 7vw, 84px);
+}
+
+.RpGuide .Hero-description {
+  font-family: "Guide Oracle", Arial, sans-serif;
+  font-weight: 600;
+  max-width: 560px;
+  margin: 45px auto 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgb(226, 237, 235);
+}
+
+.RpGuide .Hero-under {
+  font-family: "Guide Jost", Arial, sans-serif;
+  font-weight: 400;
+  max-width: 560px;
+  margin: 5px auto 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgb(164, 164, 164);
+}
+
+.RpGuide .Hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin: 24px auto 0;
+}
+
+.RpGuide .Hero-genre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--role-violet);
+  clip-path: polygon(0 9%, 98% 0, 100% 89%, 2% 100%);
+  border-radius: 100px;
+}
+
+.RpGuide .Hero-genre::after {
+  content: "";
+  position: absolute;
+  inset: 5px -5px -5px 5px;
+  z-index: -2;
+  background: rgba(0, 0, 0, 0.2);
+  clip-path: polygon(0 9%, 98% 0, 100% 89%, 2% 100%);
+  border-radius: 100px;
+}
+
+/* ========================================================================== 
+   07. Вкладки и оглавление
+   Tabs — единый компонент. --sticky: главная навигация; --icons: только символы.
+   Кнопки связываются с TabPanel через aria-controls, отдельные классы им не нужны.
+   ========================================================================== */
+.RpGuide .Guides {
+  padding-top: 28px;
+}
+
+.RpGuide .Tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 28px 0;
+}
+
+.RpGuide .Tabs > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  color: var(--role-text);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  background: color-mix(in srgb,var(--role-accent) 14%,var(--role-surface));
+  transition: border-color .2s,background .2s,color .2s;
+}
+
+.RpGuide .Tabs > button > .Icon {
+  font-size: 12px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Tabs > button:hover {
+  border-color: var(--role-accent);
+}
+
+.RpGuide .Tabs > button[aria-selected="true"] {
+  background: var(--role-accent);
+  border-color: var(--role-accent);
+  color: var(--role-surface);
+  box-shadow: 0 3px 10px #00000008;
+}
+
+.RpGuide .Tabs > button[aria-selected="true"] > .Icon {
+  color: inherit;
+}
+
+.RpGuide .Tabs > button:focus-visible {
+  outline: 2px solid var(--role-accent);
+  outline-offset: 4px;
+}
+
+.RpGuide .Tabs--sticky {
+  position: sticky;
+  top: 12px;
+  z-index: 3;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 7px;
+  border-radius: 24px;
+  background: var(--role-bg);
+  box-shadow: 0 4px 14px #00000006;
+}
+
+.RpGuide .Tabs--icons {
+  gap: 12px;
+}
+
+.RpGuide .Tabs--icons > button {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--role-accent);
+}
+
+.RpGuide .Tabs--icons > button > .Icon {
+  font-size: 23px;
+}
+
+.RpGuide .TabPanel[hidden] {
+  display: none;
+}
+
+.RpGuide .TabPanel[data-document] {
+  margin-top: 28px;
+}
+
+.RpGuide .TabPanel[data-document="rules"] {
+  --role-accent: var(--role-violet);
+}
+
+.RpGuide .TabPanel[data-document="lore"] {
+  --role-accent: var(--role-teal);
+}
+
+.RpGuide .TabPanel[data-document="application"] {
+  --role-accent: var(--role-blue);
+}
+
+.RpGuide .TabPanel--reading {
+  margin-bottom: 44px;
+}
+
+.RpGuide .TabPanel--reading > :is(h2,h3,h4):first-child {
+  margin-top: 0;
+}
+
+.RpGuide .Contents {
+  font-family: "Guide Jost",Arial,sans-serif;
+  scroll-margin-top: 120px;
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.RpGuide .Contents > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+}
+
+.RpGuide .Contents a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--role-text);
+  background: color-mix(in srgb,var(--role-accent) 15%,var(--role-surface));
+}
+
+.RpGuide .Contents a > .Icon {
+  font-size: 10px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Contents a:hover, .RpGuide .Contents a[aria-current="location"] {
+  color: var(--role-accent);
+  border-color: var(--role-accent);
+}
+
+/* На широком экране оглавление занимает отдельную левую колонку.
+   Sticky удерживает его в пределах текущей вкладки; ширина текста — до 860 px.
+   На планшете и телефоне используется обычный ряд ссылок над документом. */
+@media (min-width: 1100px) {
+  .RpGuide .TabPanel[data-document]:not([hidden]) {
+    display: grid;
+    grid-template-columns: 180px minmax(0,var(--role-document-width));
+    justify-content: center;
+    align-items: start;
+    gap: 32px;
+  }
+
+  .RpGuide .TabPanel[data-document] > .Contents {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+    min-width: 0;
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    padding: 4px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .RpGuide .Contents > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .RpGuide .Contents a {
+    padding: 9px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+
+  .RpGuide .Contents a > .Icon {
+    flex: 0 0 14px;
+    text-align: center;
+  }
+
+  .RpGuide .TabPanel[data-document] > .Document {
+    min-width: 0;
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* ========================================================================== 
+   08. Документ и секции
+   Весь основной текст остаётся в HTML. Заголовки и абзацы оформляются по тегам.
+   Section задаёт только общий отступ, без отдельных размеров для разных тем.
+   ========================================================================== */
+.RpGuide .Document {
+  overflow-wrap: anywhere;
+  max-width: var(--role-document-width);
+  margin-inline: auto;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.RpGuide .Document p {
+  margin: 12px 0;
+}
+
+.RpGuide .Document li {
+  padding-left: 4px;
+  margin-bottom: 5px;
+}
+
+.RpGuide .Document :is(h2,h3,h4) {
+  scroll-margin-top: 120px;
+}
+
+.RpGuide .Document h2 {
+  margin: 40px 0 20px;
+  padding-top: 26px;
+  border-top: 1px solid var(--role-line);
+  letter-spacing: -.6px;
+  font: 700 28px / 1.25 "Guide Jost",Arial,sans-serif;
+}
+
+.RpGuide .Document h3 {
+  margin: 27px 0 14px;
+  font: 700 23px / 1.25 "Guide Jost",Arial,sans-serif;
+}
+
+.RpGuide .Document h4 {
+  margin: 25px 0 13px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.RpGuide .Document :is(h2,h3,h4) > .Icon {
+  font-size: .72em;
+  margin-right: 11px;
+  vertical-align: middle;
+  color: var(--role-accent);
+}
+
+.RpGuide .Document :is(ul,ol) {
+  padding-left: 23px;
+  margin: 14px 0;
+}
+
+.RpGuide .Document a {
+  color: var(--role-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.RpGuide .Document strong {
+  font-weight: 700;
+}
+
+.RpGuide .Document blockquote {
+  margin: 15px 0;
+  padding: 13px 18px;
+  border: 0;
+  background: var(--role-soft);
+  border-radius: 12px;
+}
+
+.RpGuide .Document hr {
+  border: 0;
+  height: 1px;
+  background: var(--role-line);
+  margin: 26px 0;
+}
+
+.RpGuide .Document code {
+  font-family: Consolas,monospace;
+}
+
+.RpGuide .Section {
+  max-width: var(--role-document-width);
+  margin: 0 auto 68px;
+  scroll-margin-top: 120px;
+}
+
+.RpGuide .Section > h2:first-child {
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+}
+
+.RpGuide .Section > h2 > .Icon {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb,var(--role-accent) 17%,var(--role-surface));
+  font-size: 18px;
+}
+
+.RpGuide .Section > hr {
+  margin-block: 34px;
+}
+
+.RpGuide .Section--nested {
+  margin-block: 42px 64px;
+}
+
+.RpGuide .Section--nested > blockquote {
+  background: transparent;
+  padding: 0;
+}
+
+.RpGuide .Center {
+  text-align: center;
+}
+
+.RpGuide .Accent {
+  color: var(--role-accent);
+}
+
+.RpGuide .Example {
+  background: var(--role-soft);
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px 14px;
+  font-size: 12px;
+}
+
+/* ========================================================================== 
+   09. Step и Badge — шаг с дополнительной колонкой и значок заголовка
+   --reverse: картинка слева; --balanced: две текстовые колонки; --panel: раса.
+   Основной контент всегда первый в HTML. На телефоне он окажется сверху.
+   ========================================================================== */
+.RpGuide .Step {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,var(--role-media-width));
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 28px;
+  scroll-margin-top: 120px;
+}
+
+.RpGuide .Step.Section {
+  margin-bottom: 68px;
+}
+
+.RpGuide .Step > :first-child {
+  min-width: 0;
+}
+
+.RpGuide .Step > :first-child > :is(h2,h3,h4) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+  font-size: 27px;
+}
+
+.RpGuide .Step--reverse {
+  grid-template-columns: minmax(0,var(--role-media-width)) minmax(0,1.5fr);
+}
+
+.RpGuide .Step--reverse > :first-child {
+  order: 2;
+}
+
+/* Шаг без иллюстрации сохраняет пустую левую колонку. */
+.RpGuide .Step--reverse > :only-child {
+  grid-column: 2;
+}
+
+.RpGuide .Step--balanced {
+  grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+}
+
+/* История и условия вступления: текст занимает три четверти ширины. */
+.RpGuide .Step--wide-copy {
+  grid-template-columns: minmax(0,3fr) minmax(0,1fr);
+}
+
+/* Шапка организации: описание и два факта слева, герб справа.
+   Цвет наследуется от вкладки города; номера относятся только к шагам ниже. */
+.RpGuide .Step--organization {
+  --role-media-width: 180px;
+  align-items: start;
+  padding-top: 28px;
+  margin-bottom: 38px;
+  border-top: 1px solid var(--role-line);
+}
+
+.RpGuide .Step--organization > :first-child > h3 {
+  color: var(--role-accent);
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.RpGuide [data-organization] h4 {
+  font-family: "Guide Jost",Arial,sans-serif;
+}
+
+.RpGuide .Step--organization .Facts {
+  gap: 24px;
+  margin: 18px 0 0;
+}
+
+/* Длинные списки званий начинаются на одной высоте с описанием устройства. */
+.RpGuide [data-organization] > .Step--reverse {
+  align-items: start;
+}
+
+/* Широкая дополнительная колонка: навык занимает 1/3, его перки — 2/3.
+   Step--reverse меняет стороны. На телефоне остаётся общий порядок Step:
+   первый элемент (описание навыка), затем второй (перки). */
+@media (min-width: 761px) {
+  .RpGuide .Step--wide-aside {
+    grid-template-columns: minmax(0,1fr) minmax(0,2fr);
+  }
+
+  .RpGuide .Step--wide-aside.Step--reverse {
+    grid-template-columns: minmax(0,2fr) minmax(0,1fr);
+  }
+
+  /* Описание навыка начинается немного ниже верхнего края колонки перков. */
+  .RpGuide .Step--wide-aside > .Skill {
+    align-self: start;
+    margin-top: 20px;
+  }
+}
+
+
+.RpGuide .Step--race {
+  --race-portrait-size: 160px;
+  --role-media-width: var(--race-portrait-size);
+  position: relative;
+  isolation: isolate;
+  gap: 28px;
+  padding: 28px;
+}
+
+.RpGuide .Step--race::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb,var(--role-accent) 23%,var(--role-surface));
+  clip-path: polygon(1% 0,100% 3%,99% 100%,0 97%);
+}
+
+.RpGuide .Step--race > :first-child {
+  align-self: end;
+}
+
+.RpGuide .Step--race > :first-child > h4 {
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-size: 28px;
+  letter-spacing: .3px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Step--race > :first-child > em {
+  display: block;
+}
+
+/* Портрет приподнят на 5 px относительно цитаты. Отрицательный отступ
+   позволяет картинке выступать сверху, не увеличивая пустое место под ней. */
+.RpGuide .Step--race > .Figure--cutout {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  width: var(--race-portrait-size);
+  height: var(--race-portrait-size);
+  margin: calc(var(--race-portrait-size) / -3) 0 0;
+  translate: 0 -10px;
+  /* Обводка и плоская тень — как у панорам городов (.City-image). */
+  box-sizing: border-box;
+  padding: 0;
+  border: 4px solid color-mix(in srgb,var(--role-accent) 25%,var(--role-surface));
+  border-radius: 16px;
+  background: var(--role-accent);
+  box-shadow: 6px 7px 0 color-mix(in srgb,var(--role-accent) 12%,transparent);
+}
+
+.RpGuide .Step--race > .Figure--cutout > img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: inherit;
+}
+
+.RpGuide .Step--race > .Figure--cutout > .Icon {
+  width: 100%;
+  height: 100%;
+}
+
+.RpGuide .Step--race > p {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.RpGuide .Step--panel {
+  --role-media-width: auto;
+  position: relative;
+  isolation: isolate;
+  padding: 28px;
+}
+
+
+.RpGuide .Step--panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb,var(--role-accent) 23%,var(--role-surface));
+  clip-path: polygon(0 3%,99% 0,100% 97%,1% 100%);
+}
+
+.RpGuide .Step--panel > :first-child > h4 {
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-size: 28px;
+  letter-spacing: .3px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Skill > h4 {
+  font-family: "Guide Oracle",Arial,sans-serif;
+  font-size: 20px !important; 
+  letter-spacing: .3px;
+}
+
+.RpGuide .Skill > p {
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-size: 16px;
+  letter-spacing: .3px;
+  
+}
+
+.RpGuide .Badge {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  /* Сбрасываем фон и тень одноимённого штатного Badge форума. */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--role-surface);
+  font: 700 22px / 1 "Guide Jost",Arial,sans-serif;
+  vertical-align: middle;
+}
+
+.RpGuide .Badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--role-accent);
+  mask: url("data:image/webp;base64,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") center / contain no-repeat;
+  /* Поворачиваем только текстуру: число или иконка остаются ровными. */
+  rotate: var(--badge-rotation, 0deg);
+}
+
+.RpGuide .Badge > .Icon {
+  font-size: 18px;
+  margin: 0;
+}
+
+.RpGuide .Badge--small {
+  width: 30px;
+  height: 30px;
+  margin-right: 9px;
+  color: var(--role-accent);
+  background: color-mix(in srgb,var(--role-accent) 10%,transparent);
+  border-radius: 9px;
+}
+
+.RpGuide .Badge--small::before {
+  content: none;
+}
+
+.RpGuide .Badge--small > .Icon {
+  font-size: 13px;
+}
+
+/* ========================================================================== 
+   10. Note — заметка и её смысловые варианты
+   Фон наследует акцент раздела. Заголовок и иконка внутри необязательны.
+   ========================================================================== */
+.RpGuide .Note {
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin: 20px 0 20px;
+  border-radius: 14px;
+  padding: 22px 25px;
+  background: color-mix(in srgb,var(--role-accent) 25%,var(--role-surface));
+  border: 0;
+}
+
+.RpGuide .Note > :is(h2,h3,h4):first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 11px;
+  padding: 0;
+  border: 0;
+  font-size: 20px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Note :is(h2,h3,h4) .Icon {
+  color: var(--role-accent);
+}
+
+.RpGuide .Note--warning {
+  --role-accent: var(--role-amber);
+}
+
+.RpGuide .Note--success {
+  --role-accent: var(--role-forest);
+}
+
+/* Заметка на 3/4 раздела, по центру. На телефоне занимает всю ширину. */
+.RpGuide .Note--partial {
+  width: 75%;
+  margin-inline: auto;
+}
+
+/* Памятки: общий вид, наклон и тень. Medium увеличивает только текст и интервал.
+   rotate в HTML переопределяет стандартные 0.5°. */
+.RpGuide :is(.Note--compact,.Note--medium) {
+  min-width: 0;
+  margin-top: 5px;
+  padding: 15px;
+  font-size: 11px;
+  line-height: 1.1;
+  letter-spacing: 0;
+  border-radius: 14px;
+  background: color-mix(in srgb,var(--role-accent) 25%,var(--role-surface));
+  rotate: 0.5deg;
+  box-shadow: 6px 7px 0 color-mix(in srgb,var(--role-accent) 14%,transparent);
+}
+
+.RpGuide .Note--medium {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Перечни должностей и ветвей подчиняются компактной памятке,
+   сохраняя обычное оформление Facts в остальных частях страницы. */
+.RpGuide [data-organization] :is(.Note--compact,.Note--medium) .Facts {
+  margin: 12px 0 0;
+  gap: 12px;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.RpGuide [data-organization] :is(.Note--compact,.Note--medium) .Facts dt {
+  margin: 0;
+}
+
+.RpGuide [data-organization] :is(.Note--compact,.Note--medium) .Facts dd {
+  font-size: inherit;
+  color: inherit;
+}
+
+.RpGuide [data-organization] :is(.Note--compact,.Note--medium) .Facts dd p {
+  margin: 6px 0 0;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > :is(h2,h3,h4):first-child {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > p {
+  margin: 0 0 8px;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > .Example {
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > ol > li {
+  padding-left: 2px;
+  margin-bottom: 6px;
+}
+
+.RpGuide :is(.Note--compact,.Note--medium) > ol > li:last-child {
+  margin-bottom: 0;
+}
+
+.RpGuide .paper-highlight {
+  font: 400 14px / 1 "Guide Pulp", sans-serif;
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  padding: 0.2em 0.3em;
+  margin-left: 4px;
+  margin-bottom: 3px;
+  color: var(--role-surface);
+  border-radius: 10px;
+}
+
+.RpGuide .Document .paper-highlight a {
+  color: #fff;
+}
+
+.RpGuide .paper-highlight::before {
+  content: "";
+  position: absolute;
+  inset: 0.08em 0 -0.04em;
+  z-index: -1;
+  background: var(--role-accent);
+  rotate: -0.5deg;
+}
+
+.RpGuide .Document .RulePoints {
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  list-style: none;
+  gap: 0 5px;
+  padding: 0;
+}
+
+.RpGuide .Document .RulePoints > li {
+  position: relative;
+  margin: 0;
+  padding: 3px 0 3px 27px;
+  line-height: 1.75;
+}
+
+.RpGuide .RulePoints > li > .Icon {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  font-size: 12px;
+  color: var(--role-accent);
+}
+
+/* ========================================================================== 
+   11. Banner и Facts — заголовочная плашка и строка сведений
+   Facts — семантический dl: dt — название, dd — значение.
+   По умолчанию четыре колонки. --three: три; --cards: две на подложках.
+   ========================================================================== */
+.RpGuide .Banner {
+  position: relative;
+  overflow: visible;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 14px;
+  padding: 16px 170px 16px 25px;
+  background: color-mix(in srgb,var(--role-accent) 35%,var(--role-surface));
+}
+
+.RpGuide .Banner-art {
+  position: absolute;
+  right: -10px;
+  bottom: -8px;
+  width: 128px;
+  height: 128px;
+  transform: rotate(7deg);
+  pointer-events: none;
+  filter: drop-shadow(0 5px 6px #00000014);
+}
+
+/* Баннер может содержать обычную иконку вместо отдельной иллюстрации. */
+.RpGuide .Banner-art > .Icon {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 80px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Banner > :is(h2,h3) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.RpGuide .Banner > p {
+  margin: 0;
+  font-family: "Guide Jost",Arial,sans-serif;
+  color: var(--role-muted);
+}
+
+/* Баннер-спойлер: open у details задаёт начальное состояние.
+   Весь summary вместе с язычком кликабелен; отдельная кнопка не нужна. */
+.RpGuide .Banner--spoiler {
+  --banner-tab-direction: 1;
+  --banner-tab-duration: 160ms;
+  position: relative;
+  isolation: isolate;
+  margin-block: 32px;
+  min-width: 0;
+}
+
+.RpGuide .Banner--spoiler[open] {
+  --banner-tab-direction: -1;
+}
+
+.RpGuide .Banner--spoiler > summary.Banner {
+  margin: 0 0 30px;
+  list-style: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.RpGuide .Banner--spoiler > summary::-webkit-details-marker {
+  display: none;
+}
+
+.RpGuide .Banner--spoiler > summary::marker {
+  content: "";
+}
+
+.RpGuide .Banner--spoiler > summary:focus-visible {
+  --banner-tab-offset: calc(var(--banner-tab-direction) * 4px);
+  outline: 2px solid var(--role-accent);
+  outline-offset: 5px;
+}
+
+/* Стрелка и бумажный язычок двигаются вместе, без изменения их формы. */
+.RpGuide .Banner--spoiler > summary::before,
+.RpGuide .Banner--spoiler > summary::after {
+  translate: 0 var(--banner-tab-offset,0px);
+  transition: translate var(--banner-tab-duration) ease;
+}
+
+@media (hover: hover) {
+  .RpGuide .Banner--spoiler > summary:hover {
+    --banner-tab-offset: calc(var(--banner-tab-direction) * 4px);
+  }
+}
+
+/* Сначала прячем язычок. Затем меняем сторону без видимого перемещения
+   сквозь баннер и убираем атрибут, чтобы выдвинуть его на новом месте. */
+.RpGuide .Banner--spoiler[data-tab-motion] > summary {
+  --banner-tab-offset: calc(var(--banner-tab-direction) * -34px);
+}
+
+.RpGuide .Banner--spoiler[data-tab-motion="switch"] > summary::before,
+.RpGuide .Banner--spoiler[data-tab-motion="switch"] > summary::after {
+  transition: none;
+}
+
+/* Бумажный язычок ниже закрытого баннера и выше открытого. */
+.RpGuide .Banner--spoiler > summary::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  right: 78px;
+  bottom: -24px;
+  width: 58px;
+  height: 30px;
+  border-radius: 2px;
+  background: color-mix(in srgb,var(--role-muted) 25%,var(--role-surface));
+  rotate: -3deg;
+  pointer-events: auto;
+}
+
+.RpGuide .Banner--spoiler > summary::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 100px;
+  bottom: -16px;
+  width: 13px;
+  height: 13px;
+  border-right: 5px solid var(--role-muted);
+  border-bottom: 5px solid var(--role-muted);
+  scale: 1.1 .8;
+  transform: rotate(45deg);
+  pointer-events: auto;
+}
+
+.RpGuide .Banner--spoiler[open] > summary::after {
+  top: -24px;
+  bottom: auto;
+}
+
+.RpGuide .Banner--spoiler[open] > summary::before {
+  top: -16px;
+  bottom: auto;
+  transform: rotate(225deg);
+}
+
+.RpGuide .Banner--spoiler > summary > .Banner-art {
+  z-index: 2;
+}
+
+.RpGuide .Facts {
+  --columns: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--columns),minmax(0,1fr));
+  gap: 20px;
+  margin: 24px 0 25px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.RpGuide .Facts dt {
+  margin: 10px 0 0;
+  font-family: "Guide Oracle",Arial,sans-serif;
+  font-weight: 600;
+}
+
+.RpGuide .Facts dd {
+  margin: 0;
+  font-family: "Guide Jost",Arial,sans-serif;
+  font-size: 14px;
+  color: var(--role-muted);
+}
+
+.RpGuide .Facts dd p {
+  margin: 12px 0;
+}
+
+.RpGuide .Facts dd ul {
+  margin: 12px 0;
+  padding-left: 18px;
+}
+
+.RpGuide .Facts--compact {
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.RpGuide .Facts--three {
+  --columns: 3;
+  gap: 24px;
+}
+
+.RpGuide .Facts--three dd {
+  line-height: 1.6;
+}
+
+/* Три пункта с более просторной центральной колонкой. */
+.RpGuide .Facts--wide-center {
+  grid-template-columns: minmax(0,1fr) minmax(0,1.6fr) minmax(0,1fr);
+}
+
+.RpGuide .Facts--cards {
+  font-size: 16px;
+  --columns: 2;
+  gap: 13px;
+  margin: 10px auto;
+}
+
+.RpGuide .Facts--cards dt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+}
+
+.RpGuide .Facts--cards dt > h4 {
+  margin: 0;
+}
+
+.RpGuide .Facts--cards > div:only-child {
+  grid-column: 1 / -1;
+}
+
+.RpGuide .Facts--cards .paper-highlight {
+  margin: 3px 6px 3px 0;
+}
+
+.RpGuide .Facts--cards dd p {
+  margin: 9px 0 0;
+}
+
+.RpGuide .Facts--cards .Center {
+  text-align: left;
+}
+
+.RpGuide .Facts .Icon {
+  color: var(--role-accent);
+}
+
+/* Обычный Facts с расширенной третьей графой, как в сведениях о расах. */
+@media (min-width: 761px) {
+  .RpGuide .Facts--wide-third {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+}
+
+.RpGuide .Facts--wide-third dt > .Icon {
+  margin-right: 9px;
+}
+
+/* ========================================================================== 
+   12. Figure и Grid — иллюстрации и повторяющиеся элементы
+   --placeholder: заглушка; --framed: рамка; --cutout: картинка без фона.
+   --stack: один столбец; --symbols: четыре символа; --fill-last: заполнить последний ряд.
+   ========================================================================== */
+.RpGuide .Figure {
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.RpGuide .Figure > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.RpGuide .Figure--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 185px;
+  padding: 25px;
+  border: 1px dashed color-mix(in srgb,var(--role-accent) 35%,var(--role-line));
+  border-radius: 14px;
+  text-align: center;
+  background: color-mix(in srgb,var(--role-accent) 17%,var(--role-surface));
+  color: var(--role-accent);
+}
+
+.RpGuide .Figure--placeholder > .Icon {
+  font-size: 25px;
+  opacity: .55;
+}
+
+.RpGuide .Figure figcaption {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.RpGuide .Figure small {
+  font-size: 10px;
+}
+
+.RpGuide .Figure--framed {
+  width: 100%;
+  margin: 0;
+  min-height: 220px;
+  padding: 25px;
+  border: 5px solid color-mix(in srgb,var(--role-accent) 24%,var(--role-surface));
+  border-radius: 6px;
+  background: color-mix(in srgb,var(--role-accent) 78%,#18313b);
+  color: white;
+  transform: rotate(1deg);
+  box-shadow: 8px 9px 0 color-mix(in srgb,var(--role-accent) 12%,transparent);
+}
+
+.RpGuide[data-theme="dark"] .Figure--framed {
+  background: color-mix(in srgb,var(--role-accent) 46%,#10232b);
+}
+
+.RpGuide .Step--reverse > .Figure--framed {
+  transform: rotate(-1deg);
+}
+
+/* Первый шаг: снимок кнопок сохраняет компактный размер. */
+.RpGuide .Step--start > .Figure--screenshot {
+  width: min(100%,260px);
+  justify-self: end;
+}
+
+.RpGuide .Step--start > :first-child > p:last-child {
+  text-align: center;
+}
+
+.RpGuide .Step--start .Button--primary {
+  background: var(--role-blue);
+  color: var(--role-surface);
+}
+
+/* Снимки интерфейса: тема совпадает с путеводителем. */
+.RpGuide .Figure--framed.Figure--screenshot {
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.RpGuide .Figure--screenshot > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.RpGuide .Step--reverse > .Grid--stack > .Figure--screenshot {
+  transform: rotate(-1deg);
+}
+
+.RpGuide .Figure--screenshot > [data-screenshot-theme="dark"],
+.RpGuide[data-theme="dark"] .Figure--screenshot > [data-screenshot-theme="light"] {
+  display: none;
+}
+
+.RpGuide[data-theme="dark"] .Figure--screenshot > [data-screenshot-theme="dark"] {
+  display: block;
+}
+
+/* Кнопка частично выступает за нижний правый край иллюстрации.
+   Обводка и текст учитывают тему, поскольку находятся и за пределами картинки. */
+.RpGuide .Figure--action {
+  position: relative;
+}
+
+.RpGuide .Figure--action > .Button {
+  position: absolute;
+  right: -10px;
+  bottom: -28px;
+}
+
+.RpGuide .Figure--action > .Button--ghost {
+  color: var(--role-text);
+  border-color: color-mix(in srgb,var(--role-text) 55%,transparent);
+}
+
+.RpGuide .Figure--portrait {
+  width: min(100%,var(--role-media-width));
+  justify-self: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.RpGuide .Figure--cutout {
+  width: 100%;
+  height: 240px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.RpGuide .Figure--cutout > .Icon {
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 200px;
+  font-size: 42px;
+}
+
+/* Расовые портреты сохраняют исходные 150 × 150 px без увеличения. */
+.RpGuide .Figure--cutout:not(.Figure--placeholder) {
+  display: grid;
+  place-items: center;
+}
+
+.RpGuide .Figure--cutout > img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Герб организации показывается целиком. Пока изображения нет, оставляем
+   нейтральную заглушку того же размера, без выдуманной символики. */
+.RpGuide .Figure--crest {
+  width: min(100%,180px);
+  height: 240px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  justify-self: center;
+  border: 0;
+  background: transparent;
+}
+
+.RpGuide .Figure--crest > img {
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(4px 5px 0 rgb(0 0 0 / 15%));
+}
+
+.RpGuide .Figure--crest.Figure--placeholder {
+  border: 1px dashed color-mix(in srgb,var(--role-accent) 35%,var(--role-line));
+  border-radius: 14px;
+  background: color-mix(in srgb,var(--role-accent) 6%,var(--role-surface));
+}
+
+.RpGuide .Grid {
+  --columns: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--columns),minmax(0,1fr));
+  gap: 16px;
+  margin: 26px 0;
+}
+
+.RpGuide .Grid > :is(.Note,.EntityExample) {
+  margin: 0;
+  max-width: none;
+}
+
+.RpGuide .Grid > .Note {
+  margin-bottom: 5px;
+}
+
+.RpGuide .Grid--fill-last > :last-child:nth-child(2n+1) {
+  grid-column: 1 / -1;
+}
+
+.RpGuide .Grid--stack {
+  --columns: 1;
+  gap: 14px;
+  align-content: center;
+  margin: 0;
+}
+
+/* Шахматный ряд заметок: первая слева, вторая справа, каждая на 3/4 ширины. */
+.RpGuide .Grid--staggered {
+  --columns: 1;
+  gap: 24px;
+}
+
+.RpGuide .Grid--staggered > .Note {
+  width: 75%;
+  justify-self: start;
+  rotate: 0.5deg;
+}
+
+.RpGuide .Grid--staggered > .Note:nth-child(even) {
+  justify-self: end;
+  rotate: -0.5deg;
+}
+
+.RpGuide .Grid--symbols {
+  width: min(100%,220px);
+  justify-self: center;
+  margin: 0;
+}
+
+.RpGuide .Grid--symbols > div {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 5px;
+  aspect-ratio: 1;
+  padding: 15px 8px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Grid--symbols .Icon {
+  font-size: 72px;
+}
+
+.RpGuide .Grid--symbols span {
+  font: 600 16px / 1.2 "Guide Jost",Arial,sans-serif;
+  color: var(--role-text);
+}
+
+/* ========================================================================== 
+   City — город: заголовок и герб, панорама, Facts и основной текст.
+   Герб чередует стороны автоматически; настоящие изображения заменят заглушки.
+   ========================================================================== */
+.RpGuide .City {
+  --city-header-overlap: 34px;
+  margin-block: 64px 76px;
+  min-width: 0;
+}
+
+.RpGuide .City-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  padding-inline: 30px;
+  margin-bottom: calc(-1 * var(--city-header-overlap));
+}
+
+.RpGuide .City-header > h3 {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  margin: 0;
+  padding: 10px 18px;
+  border: 2px solid var(--role-accent);
+  border-radius: 14px;
+  background: var(--role-surface);
+  font-size: clamp(26px,3.2vw,36px);
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--role-accent);
+  rotate: -1deg;
+}
+
+.RpGuide .City-header > h3 > span:last-child {
+  min-width: 0;
+}
+
+.RpGuide .City-crest {
+  display: grid;
+  flex: 0 0 180px;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+  min-height: 200px;
+  margin: 0;
+  color: var(--role-accent);
+  /* Середина герба совпадает с верхним краем панорамы. */
+  translate: 0 calc(50% - var(--city-header-overlap));
+  rotate: 1deg;
+}
+
+.RpGuide .City-crest > .Icon {
+  font-size: 64px;
+  opacity: .6;
+}
+
+.RpGuide .City-crest > img {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+.RpGuide .City-crest > figcaption {
+  font-size: 10px;
+  color: var(--role-muted);
+}
+
+.RpGuide .City:nth-of-type(odd) .City-crest {
+  order: -1;
+  rotate: -1deg;
+}
+
+.RpGuide .City:nth-of-type(odd) .City-header > h3 {
+  justify-content: flex-end;
+}
+
+.RpGuide .City-image {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  min-height: 260px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 4px solid color-mix(in srgb,var(--role-accent) 25%,var(--role-surface));
+  border-radius: 12px;
+  box-shadow: 6px 7px 0 color-mix(in srgb,var(--role-accent) 12%,transparent);
+}
+
+.RpGuide .City-image > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.RpGuide .City > .Facts {
+  gap: 20px;
+  margin-block: 22px 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--role-line);
+}
+
+.RpGuide .City > .Facts dt {
+  margin-top: 0;
+}
+
+.RpGuide .City > .Facts dt > .Icon {
+  margin-right: 4px;
+}
+
+.RpGuide .City > .Facts small {
+  font-size: 12px;
+}
+
+.RpGuide .City-copy > p:first-child {
+  margin-top: 0;
+}
+
+/* ========================================================================== 
+   13. Table и Timeline — таблицы и шкала развития
+   Table — только рамка и прокрутка. Заголовки и ячейки задаются обычными тегами.
+   ========================================================================== */
+.RpGuide .Table {
+  font-family: "Guide Jost",Arial,sans-serif;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 18px 0;
+  border: 1px solid var(--role-line);
+  border-radius: 13px;
+}
+
+.RpGuide .Document table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.RpGuide .Document :is(th,td) {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--role-line);
+}
+
+.RpGuide .Document th {
+  font-weight: 700;
+  background: color-mix(in srgb,var(--role-accent) 13%,var(--role-surface));
+}
+
+.RpGuide .Document tr:last-child td {
+  border-bottom: 0;
+}
+
+.RpGuide .Document td:first-child {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.RpGuide .Document td p {
+  margin: 4px 0;
+}
+
+/* У названий степеней достаточно места, примеры начинаются отдельным абзацем. */
+.RpGuide .Document .Table--damage td:first-child {
+  width: 145px;
+  min-width: 145px;
+}
+
+.RpGuide .Document .Table--damage td p + p {
+  margin-top: 1em;
+}
+
+/* Нумерованный список с уже существующими кружками Badge. */
+.RpGuide .Document ol:has(> li > .Badge) {
+  list-style: none;
+  padding: 0;
+}
+
+.RpGuide .Document ol > li:has(> .Badge) {
+  display: grid;
+  grid-template-columns: 28px minmax(0,1fr);
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.RpGuide .Document ol > li > .Badge {
+  width: 28px;
+  height: 28px;
+  font-size: 15px;
+}
+
+.RpGuide .Document .Timeline {
+  font-family: "Guide Jost",Arial,sans-serif;
+  list-style: none;
+  margin: 19px 0;
+  padding: 0;
+  scroll-margin-top: 120px;
+}
+
+.RpGuide .Timeline > li {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  padding: 9px 0;
+  margin: 0;
+}
+
+.RpGuide .Timeline > li::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 44px;
+  bottom: -9px;
+  width: 1px;
+  background: var(--role-line);
+}
+
+.RpGuide .Timeline > li:last-child::before {
+  display: none;
+}
+
+.RpGuide .Timeline > li > span {
+  flex: 0 0 35px;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--role-accent);
+  color: var(--role-surface);
+}
+
+.RpGuide .Timeline > li > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 7px 13px;
+  border-radius: 10px;
+  flex: 1 1 0%;
+  font-size: 16px;
+  line-height: 1.65;
+  background: color-mix(in srgb,var(--role-accent) 12%,var(--role-surface));
+}
+
+.RpGuide .Timeline > li > div > .Icon {
+  margin-top: 5px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Timeline p {
+  margin: 0;
+}
+
+/* ========================================================================== 
+   14. Исключения: примеры сущностей и схема анкеты
+   EntityExample заменится общими карточками форума; это временная разметка.
+   Diagram — отдельная схема, не вариант двухколоночного шага.
+   ========================================================================== */
+.RpGuide .Document .EntityExample {
+  position: relative;
+  border: 0;
+  padding: 17px 20px;
+  border-radius: 13px;
+  background: var(--role-surface);
+}
+
+.RpGuide .EntityExample > strong {
+  font-size: 13px;
+}
+
+.RpGuide .EntityExample p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 9px 0 0;
+}
+
+.RpGuide .EntityExample > small {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--role-muted);
+  margin: 0 10px 8px 0;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--role-soft);
+}
+
+.RpGuide .Section--nested .EntityExample {
+  background: color-mix(in srgb,var(--role-accent) 10%,var(--role-surface));
+}
+
+.RpGuide .Document .EntityExample--placeholder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 112px;
+  padding: 16px;
+  border-radius: 16px;
+  background: color-mix(in srgb,var(--role-accent) 20%,var(--role-surface));
+}
+
+.RpGuide .EntityExample--placeholder > .Badge {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--role-accent);
+  background: var(--role-bg);
+  border-radius: 50%;
+}
+
+.RpGuide .EntityExample--placeholder > .Badge::before {
+  content: none;
+}
+
+.RpGuide .EntityExample--placeholder > .Badge > .Icon {
+  font-size: 22px;
+}
+
+.RpGuide .EntityExample--placeholder > div {
+  display: grid;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.RpGuide .EntityExample--placeholder strong {
+  font: 700 17px / 1.3 "Guide Jost",Arial,sans-serif;
+}
+
+.RpGuide .EntityExample--placeholder > div > span {
+  height: 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb,var(--role-accent) 18%,transparent);
+}
+
+.RpGuide .EntityExample--placeholder > div > span:last-child {
+  width: 68%;
+}
+
+.RpGuide .Diagram {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
+  gap: 20px;
+  align-items: center;
+  margin: 38px 0 0;
+  padding: 28px 0;
+}
+
+.RpGuide .Diagram > figure {
+  grid-area: 1 / 2 / 3 / 3;
+  min-height: 260px;
+  margin: 0;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px #00000007;
+  background: color-mix(in srgb,var(--role-accent) 10%,var(--role-surface));
+  border: 1px solid color-mix(in srgb,var(--role-accent) 32%,var(--role-line));
+}
+
+.RpGuide .Diagram-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 18px 15px;
+  font-size: 12px;
+  line-height: 1.5;
+  position: relative;
+  isolation: isolate;
+}
+
+.RpGuide .Diagram-label > .Icon {
+  font-size: 18px;
+  color: var(--role-accent);
+}
+
+.RpGuide .Diagram-label::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  width: 20px;
+  border-top: 1px dashed var(--role-muted);
+}
+
+.RpGuide .Diagram-label::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb,var(--role-accent) 13%,var(--role-surface));
+  clip-path: polygon(0 3%,99% 0,100% 97%,1% 100%);
+}
+
+.RpGuide .Diagram > div:nth-of-type(1) {
+  grid-area: 1 / 1;
+}
+
+.RpGuide .Diagram > div:nth-of-type(2) {
+  grid-area: 2 / 1;
+}
+
+.RpGuide .Diagram > div:nth-of-type(3) {
+  grid-area: 1 / 3;
+}
+
+.RpGuide .Diagram > div:nth-of-type(4) {
+  grid-area: 2 / 3;
+}
+
+.RpGuide .Diagram > div:nth-of-type(n+3)::after {
+  right: auto;
+  left: -20px;
+}
+
+/* ==========================================================================
+   15. Галерея персонажей
+   CharacterRail — прокрутка; Character — отдельная карточка.
+   ========================================================================== */
+.RpGuide .SectionHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 23px;
+}
+
+.RpGuide .SectionKicker {
+  display: block;
+  color: var(--role-muted);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.RpGuide .SectionHeading h2 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  margin-top: 9px;
+  font-family: "Guide Jost", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.RpGuide .SectionHeading > p {
+  font-size: 12px;
+  color: var(--role-muted);
+  padding-bottom: 3px;
+}
+
+.RpGuide .Characters {
+  padding-top: 57px;
+  padding-bottom: 44px;
+}
+
+.RpGuide .SliderActions {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.RpGuide .SliderCounter {
+  font-size: 11px;
+  color: var(--role-muted);
+  font-variant-numeric: tabular-nums;
+  margin-right: 9px;
+}
+
+.RpGuide .CharacterRail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 3px;
+  overscroll-behavior-x: contain;
+}
+
+.RpGuide .CharacterRail::-webkit-scrollbar {
+  display: none;
+}
+
+.RpGuide .Character {
+  flex: 0 0 calc(33.3333% - 13.3333px);
+  min-width: 0;
+  border-radius: var(--role-radius);
+  background: var(--role-surface);
+  border: 1px solid var(--role-line);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.RpGuide .Character-portrait {
+  height: 270px;
+  position: relative;
+  background-image: url("./assets/character-portraits.png");
+  background-size: 400%;
+  background-position: var(--portrait-position) 25%;
+  background-repeat: no-repeat;
+  background-color: rgb(38, 48, 56);
+}
+
+.RpGuide .Character-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(17, 24, 32, 0.475), transparent 55%);
+}
+
+.RpGuide .Character-tag {
+  position: absolute;
+  left: 19px;
+  bottom: 15px;
+  z-index: 1;
+  padding: 5px 9px;
+  background: rgba(17, 28, 37, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  font-size: 10px;
+  color: rgb(244, 241, 234);
+}
+
+.RpGuide .Character-body {
+  padding: 22px 23px 20px;
+}
+
+.RpGuide .Character-race {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  color: var(--role-muted);
+}
+
+.RpGuide .Character h3 {
+  font-size: 21px;
+  letter-spacing: -0.5px;
+  margin-top: 5px;
+  font-family: "Guide Jost", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.RpGuide .Character p {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--role-muted);
+  min-height: 62px;
+}
+
+.RpGuide .Character-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-top: 18px;
+  color: var(--role-primary);
+  font: 700 11px Arial, sans-serif;
+}
+
+.RpGuide .Character-link:hover {
+  text-decoration: underline;
+}
+
+.RpGuide .Character-link .Icon {
+  font-size: 10px;
+}
+
+.RpGuide .Characters-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 18px;
+  font-size: 11px;
+  color: var(--role-muted);
+}
+
+.RpGuide .DemoLabel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   16. Окошко и подвал
+   Dialog — демонстрационное окно; PreviewFooter — подписи внизу.
+   ========================================================================== */
+.RpGuide .PreviewFooter {
+  border-top: 1px solid var(--role-line);
+  width: min(var(--role-width),calc(100% - var(--role-gutter) * 2));
+  margin: auto;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  min-height: 69px;
+  font-size: 10px;
+  color: var(--role-muted);
+}
+
+.RpGuide .PreviewFooter > span:first-child {
+  font-weight: bold;
+  color: var(--role-text);
+}
+
+.RpGuide .PreviewFooter a {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.RpGuide .Dialog {
+  width: min(480px, 100% - 36px);
+  padding: 34px;
+  border: 1px solid var(--role-line);
+  border-radius: 18px;
+  color: var(--role-text);
+  background: var(--role-surface);
+  box-shadow: rgba(0, 0, 0, 0.267) 0 24px 90px;
+}
+
+.RpGuide .Dialog::backdrop {
+  background: rgba(16, 25, 35, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.RpGuide .Dialog-close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  border: 0;
+  background: transparent;
+  width: 29px;
+  height: 29px;
+}
+
+.RpGuide .Dialog h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 13px 0 17px;
+  letter-spacing: -0.7px;
+}
+
+.RpGuide .Dialog p {
+  font-size: 13px;
+  color: var(--role-muted);
+  line-height: 1.8;
+}
+
+.RpGuide .Dialog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.RpGuide .Dialog-actions:empty {
+  display: none;
+}
+
+/* ========================================================================== 
+   17. Адаптация компонентов
+   Размеры основных сущностей меняются здесь, без отдельных правил для тем страницы.
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .RpGuide {
+    --role-gutter: 24px;
+  }
+
+  .RpGuide .SiteHeader-inner {
+    gap: 30px;
+  }
+
+  .RpGuide .Step {
+    gap: 28px;
+  }
+
+  .RpGuide .Step--panel {
+    gap: 24px;
+    padding: 26px;
+  }
+
+  .RpGuide .Character-portrait {
+    height: 245px;
+  }
+
+  .RpGuide .Character p {
+    min-height: 82px;
+  }
+
+}
+
+@media (max-width: 760px) {
+  .RpGuide {
+    --role-gutter: 20px;
+  }
+
+  .RpGuide .SiteHeader-inner {
+    height: 64px;
+  }
+
+  .RpGuide .SiteNav {
+    display: none;
+  }
+
+  .RpGuide .Brand {
+    font-size: 18px;
+  }
+
+  .RpGuide .SiteActions {
+    gap: 15px;
+  }
+
+  .RpGuide .ForumLink {
+    font-size: 11px;
+  }
+
+  .RpGuide .Hero-inner {
+    min-height: 340px;
+    padding-block: 38px;
+  }
+
+  .RpGuide .Hero h1 {
+    letter-spacing: 1px;
+    font-size: 48px;
+  }
+
+  .RpGuide .Hero-copy > p {
+    font-size: 14px;
+  }
+
+  .RpGuide .Hero-genre {
+    font-size: 8px;
+  }
+
+  .RpGuide .Guides {
+    padding-top: 22px;
+  }
+
+  .RpGuide .Contents {
+    margin-bottom: 32px;
+  }
+
+  .RpGuide .Contents a {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .RpGuide .Document {
+    font-size: 14px;
+  }
+
+  .RpGuide .Document h2 {
+    font-size: 27px;
+  }
+
+  .RpGuide .Document h3 {
+    font-size: 21px;
+  }
+
+  .RpGuide .Section, .RpGuide .Step.Section {
+    margin-bottom: 46px;
+  }
+
+  .RpGuide .Step, .RpGuide .Step--reverse, .RpGuide .Step--balanced {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .RpGuide .Step--reverse > :first-child {
+    order: 0;
+    grid-column: auto;
+  }
+
+  .RpGuide .Step--organization > :first-child {
+    grid-row: 2;
+  }
+
+  .RpGuide .Step--organization > .Figure--crest {
+    grid-row: 1;
+    justify-self: start;
+    width: 110px;
+    height: 147px;
+  }
+
+  .RpGuide .Note--partial {
+    width: 100%;
+  }
+
+  .RpGuide .Step > :first-child > h2 {
+    font-size: 25px;
+  }
+
+  .RpGuide .Step--race {
+    --race-portrait-size: clamp(120px,36vw,144px);
+  }
+
+  .RpGuide .Step--race > :first-child > h4 {
+    min-height: 100px;
+    padding-right: var(--race-portrait-size);
+  }
+
+  /* На узком экране портрет остаётся над цитатой и не закрывает её текст. */
+  .RpGuide .Step--race > .Figure--cutout {
+    position: absolute;
+    top: 0;
+    right: 28px;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+    translate: 0 calc(-33.333333% - 5px);
+  }
+
+  .RpGuide .Step--panel {
+    gap: 10px;
+    padding: 26px;
+  }
+
+  .RpGuide .Step--panel > :first-child > h4 {
+    font-size: 26px;
+  }
+
+  .RpGuide .Figure--placeholder {
+    min-height: 150px;
+  }
+
+  .RpGuide .Figure--framed {
+    min-height: 210px;
+    box-shadow: 4px 5px 0 color-mix(in srgb,var(--role-accent) 12%,transparent);
+    transform: none;
+  }
+
+  .RpGuide .Step--reverse > .Figure--framed {
+    transform: none;
+  }
+
+  .RpGuide .Figure--cutout {
+    height: 210px;
+    min-height: 0;
+  }
+
+  .RpGuide .Figure--cutout > .Icon {
+    height: 130px;
+    width: 110px;
+  }
+
+  .RpGuide .Banner {
+    min-height: 108px;
+    padding-right: 115px;
+  }
+
+  .RpGuide .Banner-art {
+    width: 92px;
+    height: 92px;
+    right: -4px;
+  }
+
+  .RpGuide .Facts {
+    --columns: 2;
+    gap: 16px;
+  }
+
+  .RpGuide .Facts--three, .RpGuide .Facts--cards {
+    --columns: 1;
+  }
+
+  .RpGuide .Facts--wide-center {
+    grid-template-columns: 1fr;
+  }
+
+  .RpGuide .City {
+    --city-header-overlap: 24px;
+    margin-block: 42px 52px;
+  }
+
+  .RpGuide .City-header {
+    gap: 12px;
+    padding-inline: 12px;
+  }
+
+  .RpGuide .City-header > h3 {
+    gap: 9px;
+    padding: 8px 12px;
+    font-size: 22px;
+  }
+
+  .RpGuide .City-header .Badge {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .RpGuide .City-crest {
+    flex-basis: 96px;
+    min-height: 128px;
+  }
+
+  .RpGuide .City-crest > .Icon {
+    font-size: 46px;
+  }
+
+  .RpGuide .City-crest > img {
+    width: 96px;
+    height: auto;
+  }
+
+  .RpGuide .City-image {
+    min-height: 180px;
+  }
+
+  .RpGuide .City > .Facts {
+    gap: 18px 14px;
+  }
+
+  .RpGuide .Grid {
+    --columns: 1;
+  }
+
+  .RpGuide .Grid--staggered > .Note {
+    width: 100%;
+  }
+
+  .RpGuide .Grid--symbols {
+    --columns: 2;
+    width: min(100%,300px);
+  }
+
+  .RpGuide .Document .EntityExample--placeholder {
+    min-height: 100px;
+  }
+
+  .RpGuide .Document :is(th,td) {
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  /* Компактность на компьютере не должна уменьшать читаемость на телефоне. */
+  .RpGuide .Note--compact {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .RpGuide .Note--medium {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .RpGuide .Note--compact :is(th,td) {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .RpGuide .Timeline > li {
+    gap: 11px;
+  }
+
+  .RpGuide .Timeline > li > div {
+    font-size: 12px;
+  }
+
+  .RpGuide .Document .RulePoints {
+    grid-template-columns: 1fr;
+  }
+
+  .RpGuide .Diagram {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .RpGuide .Diagram > figure {
+    grid-area: 1 / 1 / 2 / 3;
+    min-height: 210px;
+  }
+
+  .RpGuide .Diagram > .Diagram-label {
+    grid-area: auto;
+    padding: 13px;
+    font-size: 11px;
+  }
+
+  .RpGuide .Diagram-label::after {
+    display: none;
+  }
+
+  .RpGuide .SectionHeading {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .RpGuide .SectionHeading > p {
+    display: none;
+  }
+
+  .RpGuide .SectionHeading h2 {
+    font-size: 27px;
+  }
+
+  .RpGuide .Characters {
+    padding-top: 35px;
+    padding-bottom: 28px;
+  }
+
+  .RpGuide .Character {
+    flex-basis: calc(50% - 9px);
+  }
+
+  .RpGuide .CharacterRail {
+    gap: 18px;
+  }
+
+  .RpGuide .Character-portrait {
+    height: 228px;
+  }
+
+  .RpGuide .Character p {
+    min-height: 82px;
+  }
+
+  .RpGuide .Characters-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .RpGuide .PreviewFooter {
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-block: 18px;
+  }
+
+  .RpGuide .PreviewFooter > span:nth-child(2) {
+    display: none;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .RpGuide {
+    --role-gutter: 18px;
+  }
+
+  .RpGuide .Button {
+    min-height: 45px;
+    font-size: 12px;
+  }
+
+  .RpGuide .SiteHeader-inner {
+    gap: 12px;
+  }
+
+  .RpGuide .Brand {
+    font-size: 17px;
+    gap: 9px;
+  }
+
+  .RpGuide .Brand-mark {
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+  }
+
+  .RpGuide .ForumLink {
+    gap: 7px;
+  }
+
+  .RpGuide .SiteActions {
+    gap: 12px;
+  }
+
+  .RpGuide .SiteActions .IconButton {
+    height: 32px;
+    width: 32px;
+  }
+
+  .RpGuide .Hero h1 {
+    font-size: 44px;
+  }
+
+  .RpGuide .Hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    gap: 10px;
+    margin-inline: auto;
+  }
+
+  .RpGuide .Tabs--sticky > button {
+    padding-inline: 14px;
+    font-size: 12px;
+  }
+
+  .RpGuide .Step--panel {
+    padding: 23px;
+  }
+
+  .RpGuide .SectionKicker {
+    font-size: 8px;
+    letter-spacing: 1.1px;
+  }
+
+  .RpGuide .SectionHeading h2 {
+    font-size: 25px;
+  }
+
+  .RpGuide .SliderCounter {
+    display: none;
+  }
+
+  .RpGuide .SliderActions {
+    gap: 6px;
+    align-self: flex-end;
+  }
+
+  .RpGuide .SliderActions .IconButton {
+    height: 32px;
+    width: 32px;
+    font-size: 11px;
+  }
+
+  .RpGuide .Character {
+    flex-basis: 86%;
+  }
+
+  .RpGuide .Character-portrait {
+    height: 245px;
+  }
+
+  .RpGuide .Character p {
+    min-height: 62px;
+  }
+
+  .RpGuide .Character-body {
+    padding: 20px;
+  }
+
+  .RpGuide .Dialog {
+    padding: 29px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.GuidePage {
+    scroll-behavior: auto;
+  }
+
+  .RpGuide .Banner--spoiler > summary:is(:hover,:focus-visible) {
+    --banner-tab-offset: 0px;
+  }
+
+  .RpGuide *, .RpGuide *::before, .RpGuide *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+
+}
+

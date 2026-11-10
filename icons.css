@@ -1,0 +1,38 @@
+/* Font Awesome Free — https://fontawesome.com/license/free */
+@font-face {
+  font-family: "Reboot Icons";
+  src: url("./assets/fonts/fa-solid-900.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+}
+.RpUpdate .Icon {
+  font-family: "Reboot Icons";
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+}
+.RpUpdate .Icon::before { content: var(--fa); }
+.fa-book {
+  --fa: "\f02d";
+}
+.fa-arrow-right {
+  --fa: "\f061";
+}
+.fa-users {
+  --fa: "\f0c0";
+}
+.fa-chart-line {
+  --fa: "\f201";
+}
+.fa-user-plus {
+  --fa: "\f234";
+}
+.fa-book-open {
+  --fa: "\f518";
+}
+.fa-dice {
+  --fa: "\f522";
+}
+.fa-scroll {
+  --fa: "\f70e";
+}

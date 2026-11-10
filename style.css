@@ -1,0 +1,300 @@
+/* Самостоятельная страница /role/update для iframe шириной до 700 px.
+   Общие Banner, Step, Facts, Note, Figure — в resources/guide/style.less.
+   Дополнения ограничены .RpUpdate и не меняют путеводитель. */
+
+/* 01. Документ без меню, шапки, подвала и приложения форума. */
+html.UpdateDocument { scroll-behavior: smooth; scroll-padding-top: 20px; background: #f9fafb; }
+/* В приложении Flarum зарезервированы полосы прокрутки html и body.
+   Самостоятельному документу достаточно обычной прокрутки окна. */
+html.UpdateDocument, .UpdateDocument body { height: auto; min-height: 0; overflow: visible; scrollbar-gutter: auto; }
+html.UpdateDocument[data-theme="dark"] { background: #181b20; color-scheme: dark; }
+.UpdateDocument body { margin: 0; padding: 0; min-width: 0; background: transparent; }
+.RpUpdate {
+  --role-width: 700px;
+  --role-document-width: 700px;
+  --role-media-width: 270px;
+  --role-gutter: 24px;
+  width: 100%;
+  max-width: 700px;
+  margin-inline: auto;
+  min-height: 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.RpUpdate :is(.Section, .Step, h2, h3) { scroll-margin-top: 0; }
+.RpUpdate .Container { width: calc(100% - var(--role-gutter) * 2); }
+
+/* 02. Афиша. Затемнение сохраняет читаемость текста поверх иллюстрации. */
+.RpUpdate .Hero--update {
+  background-color: #1d2030;
+  background-image:
+    linear-gradient(180deg, rgba(14,16,26,.42), rgba(14,16,26,.3) 38%, rgba(14,16,26,.78)),
+    url("./assets/update-background.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.RpUpdate .Hero--update .Hero-inner { min-height: 470px; padding-block: 44px; }
+.RpUpdate .Hero--update .Hero-copy { padding: 0; }
+.RpUpdate .Hero--update .SectionKicker { margin: 0 0 22px; font: 500 11px/1.5 "Guide Jost", sans-serif; letter-spacing: 2px; color: #d5c5ed; }
+.RpUpdate .Hero--update h1 {
+  font: 600 clamp(80px, 17vw, 132px)/1 "Guide Oracle", sans-serif;
+  letter-spacing: -.035em;
+  color: #f7efdc;
+  text-shadow: 4px 6px 0 #0e101a;
+  rotate: -2deg;
+}
+.RpUpdate .Hero--update .Hero-genre { margin: 10px auto 0; color: #201a2d; font: 700 12px/1.4 "Guide Jost", sans-serif; }
+.RpUpdate .Hero--update .Hero-genre::before { background: #b78aee; }
+.RpUpdate .Hero--update .Hero-description { margin-top: 28px; font-size: 23px; line-height: 1.4; color: #f7efdc; }
+.RpUpdate .Hero--update .Hero-under { margin-top: 18px; max-width: 455px; color: #c6c5d3; font-size: 14px; }
+.RpUpdate .Hero--update .Button--gold { background: #b78aee; color: #201a2d; }
+.RpUpdate .Hero-actions { flex-wrap: wrap; gap: 10px; }
+.RpUpdate .Button { min-height: 42px; padding-inline: 18px; font-size: 12px; }
+
+/* 03. Фоновые магические круги: только декор, без событий и влияния на размеры.
+   Прозрачность меняется здесь, формы — в assets/update-patterns/*.svg. */
+.RpUpdate {
+  --update-circle-opacity: .07;
+  --update-circle-size: 380px;
+  --update-step-circle-size: 260px;
+  --update-circle-primary: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDwhLS0g0JTQtdC60L7RgNCw0YLQuNCy0L3QsNGPINCz0LXQvtC80LXRgtGA0LjRjy4g0KbQstC10YIg0Lgg0L/RgNC+0LfRgNCw0YfQvdC+0YHRgtGMINC30LDQtNCw0Y7RgtGB0Y8gQ1NTLdC80LDRgdC60L7QuS4gLS0+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSIxOTYiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjE4OCIvPgogIDxwYXRoIGQ9Ik0gMjEwLjAwLDIxLjAwIEwgMjEwLjAwLDE1LjAwIi8+PHBhdGggZD0iTSAyMzQuNjcsMjIuNjIgTCAyMzUuNDUsMTYuNjciLz48cGF0aCBkPSJNIDI1OC45MiwyNy40NCBMIDI2MC40NywyMS42NCIvPjxwYXRoIGQ9Ik0gMjgyLjMzLDM1LjM5IEwgMjg0LjYyLDI5Ljg0Ii8+PHBhdGggZD0iTSAzMDQuNTAsNDYuMzIgTCAzMDcuNTAsNDEuMTMiLz48cGF0aCBkPSJNIDMyNS4wNiw2MC4wNiBMIDMyOC43MSw1NS4zMCIvPjxwYXRoIGQ9Ik0gMzQzLjY0LDc2LjM2IEwgMzQ3Ljg5LDcyLjExIi8+PHBhdGggZD0iTSAzNTkuOTQsOTQuOTQgTCAzNjQuNzAsOTEuMjkiLz48cGF0aCBkPSJNIDM3My42OCwxMTUuNTAgTCAzNzguODcsMTEyLjUwIi8+PHBhdGggZD0iTSAzODQuNjEsMTM3LjY3IEwgMzkwLjE2LDEzNS4zOCIvPjxwYXRoIGQ9Ik0gMzkyLjU2LDE2MS4wOCBMIDM5OC4zNiwxNTkuNTMiLz48cGF0aCBkPSJNIDM5Ny4zOCwxODUuMzMgTCA0MDMuMzMsMTg0LjU1Ii8+PHBhdGggZD0iTSAzOTkuMDAsMjEwLjAwIEwgNDA1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMzk3LjM4LDIzNC42NyBMIDQwMy4zMywyMzUuNDUiLz48cGF0aCBkPSJNIDM5Mi41NiwyNTguOTIgTCAzOTguMzYsMjYwLjQ3Ii8+PHBhdGggZD0iTSAzODQuNjEsMjgyLjMzIEwgMzkwLjE2LDI4NC42MiIvPjxwYXRoIGQ9Ik0gMzczLjY4LDMwNC41MCBMIDM3OC44NywzMDcuNTAiLz48cGF0aCBkPSJNIDM1OS45NCwzMjUuMDYgTCAzNjQuNzAsMzI4LjcxIi8+PHBhdGggZD0iTSAzNDMuNjQsMzQzLjY0IEwgMzQ3Ljg5LDM0Ny44OSIvPjxwYXRoIGQ9Ik0gMzI1LjA2LDM1OS45NCBMIDMyOC43MSwzNjQuNzAiLz48cGF0aCBkPSJNIDMwNC41MCwzNzMuNjggTCAzMDcuNTAsMzc4Ljg3Ii8+PHBhdGggZD0iTSAyODIuMzMsMzg0LjYxIEwgMjg0LjYyLDM5MC4xNiIvPjxwYXRoIGQ9Ik0gMjU4LjkyLDM5Mi41NiBMIDI2MC40NywzOTguMzYiLz48cGF0aCBkPSJNIDIzNC42NywzOTcuMzggTCAyMzUuNDUsNDAzLjMzIi8+PHBhdGggZD0iTSAyMTAuMDAsMzk5LjAwIEwgMjEwLjAwLDQwNS4wMCIvPjxwYXRoIGQ9Ik0gMTg1LjMzLDM5Ny4zOCBMIDE4NC41NSw0MDMuMzMiLz48cGF0aCBkPSJNIDE2MS4wOCwzOTIuNTYgTCAxNTkuNTMsMzk4LjM2Ii8+PHBhdGggZD0iTSAxMzcuNjcsMzg0LjYxIEwgMTM1LjM4LDM5MC4xNiIvPjxwYXRoIGQ9Ik0gMTE1LjUwLDM3My42OCBMIDExMi41MCwzNzguODciLz48cGF0aCBkPSJNIDk0Ljk0LDM1OS45NCBMIDkxLjI5LDM2NC43MCIvPjxwYXRoIGQ9Ik0gNzYuMzYsMzQzLjY0IEwgNzIuMTEsMzQ3Ljg5Ii8+PHBhdGggZD0iTSA2MC4wNiwzMjUuMDYgTCA1NS4zMCwzMjguNzEiLz48cGF0aCBkPSJNIDQ2LjMyLDMwNC41MCBMIDQxLjEzLDMwNy41MCIvPjxwYXRoIGQ9Ik0gMzUuMzksMjgyLjMzIEwgMjkuODQsMjg0LjYyIi8+PHBhdGggZD0iTSAyNy40NCwyNTguOTIgTCAyMS42NCwyNjAuNDciLz48cGF0aCBkPSJNIDIyLjYyLDIzNC42NyBMIDE2LjY3LDIzNS40NSIvPjxwYXRoIGQ9Ik0gMjEuMDAsMjEwLjAwIEwgMTUuMDAsMjEwLjAwIi8+PHBhdGggZD0iTSAyMi42MiwxODUuMzMgTCAxNi42NywxODQuNTUiLz48cGF0aCBkPSJNIDI3LjQ0LDE2MS4wOCBMIDIxLjY0LDE1OS41MyIvPjxwYXRoIGQ9Ik0gMzUuMzksMTM3LjY3IEwgMjkuODQsMTM1LjM4Ii8+PHBhdGggZD0iTSA0Ni4zMiwxMTUuNTAgTCA0MS4xMywxMTIuNTAiLz48cGF0aCBkPSJNIDYwLjA2LDk0Ljk0IEwgNTUuMzAsOTEuMjkiLz48cGF0aCBkPSJNIDc2LjM2LDc2LjM2IEwgNzIuMTEsNzIuMTEiLz48cGF0aCBkPSJNIDk0Ljk0LDYwLjA2IEwgOTEuMjksNTUuMzAiLz48cGF0aCBkPSJNIDExNS41MCw0Ni4zMiBMIDExMi41MCw0MS4xMyIvPjxwYXRoIGQ9Ik0gMTM3LjY3LDM1LjM5IEwgMTM1LjM4LDI5Ljg0Ii8+PHBhdGggZD0iTSAxNjEuMDgsMjcuNDQgTCAxNTkuNTMsMjEuNjQiLz48cGF0aCBkPSJNIDE4NS4zMywyMi42MiBMIDE4NC41NSwxNi42NyIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTUyIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsNTguMDAgMzYyLjAwLDIxMC4wMCAyMTAuMDAsMzYyLjAwIDU4LjAwLDIxMC4wMCIvPgogIDxwb2x5Z29uIHBvaW50cz0iMzE3LjQ4LDEwMi41MiAzMTcuNDgsMzE3LjQ4IDEwMi41MiwzMTcuNDggMTAyLjUyLDEwMi41MiIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTA2Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsMTA0LjAwIDI4NC45NSwxMzUuMDUgMzE2LjAwLDIxMC4wMCAyODQuOTUsMjg0Ljk1IDIxMC4wMCwzMTYuMDAgMTM1LjA1LDI4NC45NSAxMDQuMDAsMjEwLjAwIDEzNS4wNSwxMzUuMDUiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjY1Ii8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSI0OCIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTgiLz4KICA8Y2lyY2xlIGN4PSIyMTAuMDAiIGN5PSI1OC4wMCIgcj0iMTQiLz4KICA8Y2lyY2xlIGN4PSIzNjIuMDAiIGN5PSIyMTAuMDAiIHI9IjE0Ii8+CiAgPGNpcmNsZSBjeD0iMjEwLjAwIiBjeT0iMzYyLjAwIiByPSIxNCIvPgogIDxjaXJjbGUgY3g9IjU4LjAwIiBjeT0iMjEwLjAwIiByPSIxNCIvPgo8L3N2Zz4K");
+  --update-circle-secondary: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDwhLS0g0JTQtdC60L7RgNCw0YLQuNCy0L3QsNGPINCz0LXQvtC80LXRgtGA0LjRjy4g0KbQstC10YIg0Lgg0L/RgNC+0LfRgNCw0YfQvdC+0YHRgtGMINC30LDQtNCw0Y7RgtGB0Y8gQ1NTLdC80LDRgdC60L7QuS4gLS0+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSIxOTYiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjE4NiIvPgogIDxwYXRoIGQ9Ik0gMjEwLjAwLDIzLjAwIEwgMjEwLjAwLDE1LjAwIi8+PHBhdGggZD0iTSAyMjguMzMsMjMuOTAgTCAyMjkuMTEsMTUuOTQiLz48cGF0aCBkPSJNIDI0Ni40OCwyNi41OSBMIDI0OC4wNCwxOC43NSIvPjxwYXRoIGQ9Ik0gMjY0LjI4LDMxLjA1IEwgMjY2LjYxLDIzLjQwIi8+PHBhdGggZD0iTSAyODEuNTYsMzcuMjMgTCAyODQuNjIsMjkuODQiLz48cGF0aCBkPSJNIDI5OC4xNSw0NS4wOCBMIDMwMS45MiwzOC4wMyIvPjxwYXRoIGQ9Ik0gMzEzLjg5LDU0LjUyIEwgMzE4LjM0LDQ3Ljg2Ii8+PHBhdGggZD0iTSAzMjguNjMsNjUuNDUgTCAzMzMuNzEsNTkuMjYiLz48cGF0aCBkPSJNIDM0Mi4yMyw3Ny43NyBMIDM0Ny44OSw3Mi4xMSIvPjxwYXRoIGQ9Ik0gMzU0LjU1LDkxLjM3IEwgMzYwLjc0LDg2LjI5Ii8+PHBhdGggZD0iTSAzNjUuNDgsMTA2LjExIEwgMzcyLjE0LDEwMS42NiIvPjxwYXRoIGQ9Ik0gMzc0LjkyLDEyMS44NSBMIDM4MS45NywxMTguMDgiLz48cGF0aCBkPSJNIDM4Mi43NywxMzguNDQgTCAzOTAuMTYsMTM1LjM4Ii8+PHBhdGggZD0iTSAzODguOTUsMTU1LjcyIEwgMzk2LjYwLDE1My4zOSIvPjxwYXRoIGQ9Ik0gMzkzLjQxLDE3My41MiBMIDQwMS4yNSwxNzEuOTYiLz48cGF0aCBkPSJNIDM5Ni4xMCwxOTEuNjcgTCA0MDQuMDYsMTkwLjg5Ii8+PHBhdGggZD0iTSAzOTcuMDAsMjEwLjAwIEwgNDA1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMzk2LjEwLDIyOC4zMyBMIDQwNC4wNiwyMjkuMTEiLz48cGF0aCBkPSJNIDM5My40MSwyNDYuNDggTCA0MDEuMjUsMjQ4LjA0Ii8+PHBhdGggZD0iTSAzODguOTUsMjY0LjI4IEwgMzk2LjYwLDI2Ni42MSIvPjxwYXRoIGQ9Ik0gMzgyLjc3LDI4MS41NiBMIDM5MC4xNiwyODQuNjIiLz48cGF0aCBkPSJNIDM3NC45MiwyOTguMTUgTCAzODEuOTcsMzAxLjkyIi8+PHBhdGggZD0iTSAzNjUuNDgsMzEzLjg5IEwgMzcyLjE0LDMxOC4zNCIvPjxwYXRoIGQ9Ik0gMzU0LjU1LDMyOC42MyBMIDM2MC43NCwzMzMuNzEiLz48cGF0aCBkPSJNIDM0Mi4yMywzNDIuMjMgTCAzNDcuODksMzQ3Ljg5Ii8+PHBhdGggZD0iTSAzMjguNjMsMzU0LjU1IEwgMzMzLjcxLDM2MC43NCIvPjxwYXRoIGQ9Ik0gMzEzLjg5LDM2NS40OCBMIDMxOC4zNCwzNzIuMTQiLz48cGF0aCBkPSJNIDI5OC4xNSwzNzQuOTIgTCAzMDEuOTIsMzgxLjk3Ii8+PHBhdGggZD0iTSAyODEuNTYsMzgyLjc3IEwgMjg0LjYyLDM5MC4xNiIvPjxwYXRoIGQ9Ik0gMjY0LjI4LDM4OC45NSBMIDI2Ni42MSwzOTYuNjAiLz48cGF0aCBkPSJNIDI0Ni40OCwzOTMuNDEgTCAyNDguMDQsNDAxLjI1Ii8+PHBhdGggZD0iTSAyMjguMzMsMzk2LjEwIEwgMjI5LjExLDQwNC4wNiIvPjxwYXRoIGQ9Ik0gMjEwLjAwLDM5Ny4wMCBMIDIxMC4wMCw0MDUuMDAiLz48cGF0aCBkPSJNIDE5MS42NywzOTYuMTAgTCAxOTAuODksNDA0LjA2Ii8+PHBhdGggZD0iTSAxNzMuNTIsMzkzLjQxIEwgMTcxLjk2LDQwMS4yNSIvPjxwYXRoIGQ9Ik0gMTU1LjcyLDM4OC45NSBMIDE1My4zOSwzOTYuNjAiLz48cGF0aCBkPSJNIDEzOC40NCwzODIuNzcgTCAxMzUuMzgsMzkwLjE2Ii8+PHBhdGggZD0iTSAxMjEuODUsMzc0LjkyIEwgMTE4LjA4LDM4MS45NyIvPjxwYXRoIGQ9Ik0gMTA2LjExLDM2NS40OCBMIDEwMS42NiwzNzIuMTQiLz48cGF0aCBkPSJNIDkxLjM3LDM1NC41NSBMIDg2LjI5LDM2MC43NCIvPjxwYXRoIGQ9Ik0gNzcuNzcsMzQyLjIzIEwgNzIuMTEsMzQ3Ljg5Ii8+PHBhdGggZD0iTSA2NS40NSwzMjguNjMgTCA1OS4yNiwzMzMuNzEiLz48cGF0aCBkPSJNIDU0LjUyLDMxMy44OSBMIDQ3Ljg2LDMxOC4zNCIvPjxwYXRoIGQ9Ik0gNDUuMDgsMjk4LjE1IEwgMzguMDMsMzAxLjkyIi8+PHBhdGggZD0iTSAzNy4yMywyODEuNTYgTCAyOS44NCwyODQuNjIiLz48cGF0aCBkPSJNIDMxLjA1LDI2NC4yOCBMIDIzLjQwLDI2Ni42MSIvPjxwYXRoIGQ9Ik0gMjYuNTksMjQ2LjQ4IEwgMTguNzUsMjQ4LjA0Ii8+PHBhdGggZD0iTSAyMy45MCwyMjguMzMgTCAxNS45NCwyMjkuMTEiLz48cGF0aCBkPSJNIDIzLjAwLDIxMC4wMCBMIDE1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMjMuOTAsMTkxLjY3IEwgMTUuOTQsMTkwLjg5Ii8+PHBhdGggZD0iTSAyNi41OSwxNzMuNTIgTCAxOC43NSwxNzEuOTYiLz48cGF0aCBkPSJNIDMxLjA1LDE1NS43MiBMIDIzLjQwLDE1My4zOSIvPjxwYXRoIGQ9Ik0gMzcuMjMsMTM4LjQ0IEwgMjkuODQsMTM1LjM4Ii8+PHBhdGggZD0iTSA0NS4wOCwxMjEuODUgTCAzOC4wMywxMTguMDgiLz48cGF0aCBkPSJNIDU0LjUyLDEwNi4xMSBMIDQ3Ljg2LDEwMS42NiIvPjxwYXRoIGQ9Ik0gNjUuNDUsOTEuMzcgTCA1OS4yNiw4Ni4yOSIvPjxwYXRoIGQ9Ik0gNzcuNzcsNzcuNzcgTCA3Mi4xMSw3Mi4xMSIvPjxwYXRoIGQ9Ik0gOTEuMzcsNjUuNDUgTCA4Ni4yOSw1OS4yNiIvPjxwYXRoIGQ9Ik0gMTA2LjExLDU0LjUyIEwgMTAxLjY2LDQ3Ljg2Ii8+PHBhdGggZD0iTSAxMjEuODUsNDUuMDggTCAxMTguMDgsMzguMDMiLz48cGF0aCBkPSJNIDEzOC40NCwzNy4yMyBMIDEzNS4zOCwyOS44NCIvPjxwYXRoIGQ9Ik0gMTU1LjcyLDMxLjA1IEwgMTUzLjM5LDIzLjQwIi8+PHBhdGggZD0iTSAxNzMuNTIsMjYuNTkgTCAxNzEuOTYsMTguNzUiLz48cGF0aCBkPSJNIDE5MS42NywyMy45MCBMIDE5MC44OSwxNS45NCIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTU4Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsMzQuMDAgMzM0LjQ1LDMzNC40NSAzNC4wMCwyMTAuMDAgMzM0LjQ1LDg1LjU1IDIxMC4wMCwzODYuMDAgODUuNTUsODUuNTUgMzg2LjAwLDIxMC4wMCA4NS41NSwzMzQuNDUiLz4KICA8cG9seWdvbiBwb2ludHM9IjI3MC4wOCw2NC45NSAyNzAuMDgsMzU1LjA1IDY0Ljk1LDE0OS45MiAzNTUuMDUsMTQ5LjkyIDE0OS45MiwzNTUuMDUgMTQ5LjkyLDY0Ljk1IDM1NS4wNSwyNzAuMDggNjQuOTUsMjcwLjA4Ii8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSIxMDAiLz4KICA8cG9seWdvbiBwb2ludHM9IjIxMC4wMCw5OS4wMCAzMDYuMTMsMjY1LjUwIDExMy44NywyNjUuNTAiLz4KICA8cG9seWdvbiBwb2ludHM9IjIxMC4wMCwzMjEuMDAgMTEzLjg3LDE1NC41MCAzMDYuMTMsMTU0LjUwIi8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSI1OCIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iNDUiLz4KICA8Y2lyY2xlIGN4PSIzODQuMDAiIGN5PSIyMTAuMDAiIHI9IjYiLz4KICA8Y2lyY2xlIGN4PSIzMzMuMDQiIGN5PSIzMzMuMDQiIHI9IjYiLz4KICA8Y2lyY2xlIGN4PSIyMTAuMDAiIGN5PSIzODQuMDAiIHI9IjYiLz4KICA8Y2lyY2xlIGN4PSI4Ni45NiIgY3k9IjMzMy4wNCIgcj0iNiIvPgogIDxjaXJjbGUgY3g9IjM2LjAwIiBjeT0iMjEwLjAwIiByPSI2Ii8+CiAgPGNpcmNsZSBjeD0iODYuOTYiIGN5PSI4Ni45NiIgcj0iNiIvPgogIDxjaXJjbGUgY3g9IjIxMC4wMCIgY3k9IjM2LjAwIiByPSI2Ii8+CiAgPGNpcmNsZSBjeD0iMzMzLjA0IiBjeT0iODYuOTYiIHI9IjYiLz4KPC9zdmc+Cg==");
+}
+.RpUpdate[data-theme="dark"] { --update-circle-opacity: .055; }
+.RpUpdate .Section--feature { position: relative; isolation: isolate; overflow: clip; }
+.RpUpdate .Section--feature > .Container { position: relative; z-index: 1; }
+.RpUpdate .Section--feature::before,
+.RpUpdate .Section--feature::after {
+  content: "";
+  position: absolute;
+  width: var(--update-circle-size);
+  aspect-ratio: 1;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--role-accent);
+  opacity: var(--update-circle-opacity);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.RpUpdate .Section--feature::before {
+  top: 100px;
+  left: -170px;
+  rotate: -17deg;
+  -webkit-mask-image: var(--update-circle-primary);
+  mask-image: var(--update-circle-primary);
+}
+.RpUpdate .Section--feature::after {
+  right: -160px;
+  bottom: 85px;
+  rotate: 23deg;
+  -webkit-mask-image: var(--update-circle-secondary);
+  mask-image: var(--update-circle-secondary);
+}
+.RpUpdate #update-world,
+.RpUpdate #update-roadmap {
+  --update-circle-primary: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDwhLS0g0JTQtdC60L7RgNCw0YLQuNCy0L3QsNGPINCz0LXQvtC80LXRgtGA0LjRjy4g0KbQstC10YIg0Lgg0L/RgNC+0LfRgNCw0YfQvdC+0YHRgtGMINC30LDQtNCw0Y7RgtGB0Y8gQ1NTLdC80LDRgdC60L7QuS4gLS0+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSIxOTYiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjE4NyIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTU1Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsNDMuMDAgMzU0LjYzLDI5My41MCA2NS4zNywyOTMuNTAiLz4KICA8cG9seWdvbiBwb2ludHM9IjI5OS4xMCwxMjAuOTAgMjk5LjEwLDI5OS4xMCAxMjAuOTAsMjk5LjEwIDEyMC45MCwxMjAuOTAiLz4KICA8cG9seWdvbiBwb2ludHM9IjIxMC4wMCw4NC4wMCAzMzYuMDAsMjEwLjAwIDIxMC4wMCwzMzYuMDAgODQuMDAsMjEwLjAwIi8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSI5OSIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iNDgiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjMwIi8+CiAgPHBhdGggZD0iTSAyMTAuMDAsMzIuMDAgTCAyMTAuMDAsMjUuMDAiLz48cGF0aCBkPSJNIDI0MC45MSwzNC43MCBMIDI0Mi4xMiwyNy44MSIvPjxwYXRoIGQ9Ik0gMjcwLjg4LDQyLjczIEwgMjczLjI3LDM2LjE2Ii8+PHBhdGggZD0iTSAyOTkuMDAsNTUuODUgTCAzMDIuNTAsNDkuNzkiLz48cGF0aCBkPSJNIDMyNC40Miw3My42NCBMIDMyOC45Miw2OC4yOCIvPjxwYXRoIGQ9Ik0gMzQ2LjM2LDk1LjU4IEwgMzUxLjcyLDkxLjA4Ii8+PHBhdGggZD0iTSAzNjQuMTUsMTIxLjAwIEwgMzcwLjIxLDExNy41MCIvPjxwYXRoIGQ9Ik0gMzc3LjI3LDE0OS4xMiBMIDM4My44NCwxNDYuNzMiLz48cGF0aCBkPSJNIDM4NS4zMCwxNzkuMDkgTCAzOTIuMTksMTc3Ljg4Ii8+PHBhdGggZD0iTSAzODguMDAsMjEwLjAwIEwgMzk1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMzg1LjMwLDI0MC45MSBMIDM5Mi4xOSwyNDIuMTIiLz48cGF0aCBkPSJNIDM3Ny4yNywyNzAuODggTCAzODMuODQsMjczLjI3Ii8+PHBhdGggZD0iTSAzNjQuMTUsMjk5LjAwIEwgMzcwLjIxLDMwMi41MCIvPjxwYXRoIGQ9Ik0gMzQ2LjM2LDMyNC40MiBMIDM1MS43MiwzMjguOTIiLz48cGF0aCBkPSJNIDMyNC40MiwzNDYuMzYgTCAzMjguOTIsMzUxLjcyIi8+PHBhdGggZD0iTSAyOTkuMDAsMzY0LjE1IEwgMzAyLjUwLDM3MC4yMSIvPjxwYXRoIGQ9Ik0gMjcwLjg4LDM3Ny4yNyBMIDI3My4yNywzODMuODQiLz48cGF0aCBkPSJNIDI0MC45MSwzODUuMzAgTCAyNDIuMTIsMzkyLjE5Ii8+PHBhdGggZD0iTSAyMTAuMDAsMzg4LjAwIEwgMjEwLjAwLDM5NS4wMCIvPjxwYXRoIGQ9Ik0gMTc5LjA5LDM4NS4zMCBMIDE3Ny44OCwzOTIuMTkiLz48cGF0aCBkPSJNIDE0OS4xMiwzNzcuMjcgTCAxNDYuNzMsMzgzLjg0Ii8+PHBhdGggZD0iTSAxMjEuMDAsMzY0LjE1IEwgMTE3LjUwLDM3MC4yMSIvPjxwYXRoIGQ9Ik0gOTUuNTgsMzQ2LjM2IEwgOTEuMDgsMzUxLjcyIi8+PHBhdGggZD0iTSA3My42NCwzMjQuNDIgTCA2OC4yOCwzMjguOTIiLz48cGF0aCBkPSJNIDU1Ljg1LDI5OS4wMCBMIDQ5Ljc5LDMwMi41MCIvPjxwYXRoIGQ9Ik0gNDIuNzMsMjcwLjg4IEwgMzYuMTYsMjczLjI3Ii8+PHBhdGggZD0iTSAzNC43MCwyNDAuOTEgTCAyNy44MSwyNDIuMTIiLz48cGF0aCBkPSJNIDMyLjAwLDIxMC4wMCBMIDI1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMzQuNzAsMTc5LjA5IEwgMjcuODEsMTc3Ljg4Ii8+PHBhdGggZD0iTSA0Mi43MywxNDkuMTIgTCAzNi4xNiwxNDYuNzMiLz48cGF0aCBkPSJNIDU1Ljg1LDEyMS4wMCBMIDQ5Ljc5LDExNy41MCIvPjxwYXRoIGQ9Ik0gNzMuNjQsOTUuNTggTCA2OC4yOCw5MS4wOCIvPjxwYXRoIGQ9Ik0gOTUuNTgsNzMuNjQgTCA5MS4wOCw2OC4yOCIvPjxwYXRoIGQ9Ik0gMTIxLjAwLDU1Ljg1IEwgMTE3LjUwLDQ5Ljc5Ii8+PHBhdGggZD0iTSAxNDkuMTIsNDIuNzMgTCAxNDYuNzMsMzYuMTYiLz48cGF0aCBkPSJNIDE3OS4wOSwzNC43MCBMIDE3Ny44OCwyNy44MSIvPgogIDxjaXJjbGUgY3g9IjIxMC4wMCIgY3k9IjgyLjAwIiByPSIyNCIvPgogIDxjaXJjbGUgY3g9IjMzOC4wMCIgY3k9IjIxMC4wMCIgcj0iMjQiLz4KICA8Y2lyY2xlIGN4PSIyMTAuMDAiIGN5PSIzMzguMDAiIHI9IjI0Ii8+CiAgPGNpcmNsZSBjeD0iODIuMDAiIGN5PSIyMTAuMDAiIHI9IjI0Ii8+CiAgPGNpcmNsZSBjeD0iMjEwLjAwIiBjeT0iODIuMDAiIHI9IjE0Ii8+CiAgPGNpcmNsZSBjeD0iMzM4LjAwIiBjeT0iMjEwLjAwIiByPSIxNCIvPgogIDxjaXJjbGUgY3g9IjIxMC4wMCIgY3k9IjMzOC4wMCIgcj0iMTQiLz4KICA8Y2lyY2xlIGN4PSI4Mi4wMCIgY3k9IjIxMC4wMCIgcj0iMTQiLz4KPC9zdmc+Cg==");
+  --update-circle-secondary: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDwhLS0g0JTQtdC60L7RgNCw0YLQuNCy0L3QsNGPINCz0LXQvtC80LXRgtGA0LjRjy4g0KbQstC10YIg0Lgg0L/RgNC+0LfRgNCw0YfQvdC+0YHRgtGMINC30LDQtNCw0Y7RgtGB0Y8gQ1NTLdC80LDRgdC60L7QuS4gLS0+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSIxOTYiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjE4OCIvPgogIDxwYXRoIGQ9Ik0gMjEwLjAwLDIxLjAwIEwgMjEwLjAwLDE1LjAwIi8+PHBhdGggZD0iTSAyMzQuNjcsMjIuNjIgTCAyMzUuNDUsMTYuNjciLz48cGF0aCBkPSJNIDI1OC45MiwyNy40NCBMIDI2MC40NywyMS42NCIvPjxwYXRoIGQ9Ik0gMjgyLjMzLDM1LjM5IEwgMjg0LjYyLDI5Ljg0Ii8+PHBhdGggZD0iTSAzMDQuNTAsNDYuMzIgTCAzMDcuNTAsNDEuMTMiLz48cGF0aCBkPSJNIDMyNS4wNiw2MC4wNiBMIDMyOC43MSw1NS4zMCIvPjxwYXRoIGQ9Ik0gMzQzLjY0LDc2LjM2IEwgMzQ3Ljg5LDcyLjExIi8+PHBhdGggZD0iTSAzNTkuOTQsOTQuOTQgTCAzNjQuNzAsOTEuMjkiLz48cGF0aCBkPSJNIDM3My42OCwxMTUuNTAgTCAzNzguODcsMTEyLjUwIi8+PHBhdGggZD0iTSAzODQuNjEsMTM3LjY3IEwgMzkwLjE2LDEzNS4zOCIvPjxwYXRoIGQ9Ik0gMzkyLjU2LDE2MS4wOCBMIDM5OC4zNiwxNTkuNTMiLz48cGF0aCBkPSJNIDM5Ny4zOCwxODUuMzMgTCA0MDMuMzMsMTg0LjU1Ii8+PHBhdGggZD0iTSAzOTkuMDAsMjEwLjAwIEwgNDA1LjAwLDIxMC4wMCIvPjxwYXRoIGQ9Ik0gMzk3LjM4LDIzNC42NyBMIDQwMy4zMywyMzUuNDUiLz48cGF0aCBkPSJNIDM5Mi41NiwyNTguOTIgTCAzOTguMzYsMjYwLjQ3Ii8+PHBhdGggZD0iTSAzODQuNjEsMjgyLjMzIEwgMzkwLjE2LDI4NC42MiIvPjxwYXRoIGQ9Ik0gMzczLjY4LDMwNC41MCBMIDM3OC44NywzMDcuNTAiLz48cGF0aCBkPSJNIDM1OS45NCwzMjUuMDYgTCAzNjQuNzAsMzI4LjcxIi8+PHBhdGggZD0iTSAzNDMuNjQsMzQzLjY0IEwgMzQ3Ljg5LDM0Ny44OSIvPjxwYXRoIGQ9Ik0gMzI1LjA2LDM1OS45NCBMIDMyOC43MSwzNjQuNzAiLz48cGF0aCBkPSJNIDMwNC41MCwzNzMuNjggTCAzMDcuNTAsMzc4Ljg3Ii8+PHBhdGggZD0iTSAyODIuMzMsMzg0LjYxIEwgMjg0LjYyLDM5MC4xNiIvPjxwYXRoIGQ9Ik0gMjU4LjkyLDM5Mi41NiBMIDI2MC40NywzOTguMzYiLz48cGF0aCBkPSJNIDIzNC42NywzOTcuMzggTCAyMzUuNDUsNDAzLjMzIi8+PHBhdGggZD0iTSAyMTAuMDAsMzk5LjAwIEwgMjEwLjAwLDQwNS4wMCIvPjxwYXRoIGQ9Ik0gMTg1LjMzLDM5Ny4zOCBMIDE4NC41NSw0MDMuMzMiLz48cGF0aCBkPSJNIDE2MS4wOCwzOTIuNTYgTCAxNTkuNTMsMzk4LjM2Ii8+PHBhdGggZD0iTSAxMzcuNjcsMzg0LjYxIEwgMTM1LjM4LDM5MC4xNiIvPjxwYXRoIGQ9Ik0gMTE1LjUwLDM3My42OCBMIDExMi41MCwzNzguODciLz48cGF0aCBkPSJNIDk0Ljk0LDM1OS45NCBMIDkxLjI5LDM2NC43MCIvPjxwYXRoIGQ9Ik0gNzYuMzYsMzQzLjY0IEwgNzIuMTEsMzQ3Ljg5Ii8+PHBhdGggZD0iTSA2MC4wNiwzMjUuMDYgTCA1NS4zMCwzMjguNzEiLz48cGF0aCBkPSJNIDQ2LjMyLDMwNC41MCBMIDQxLjEzLDMwNy41MCIvPjxwYXRoIGQ9Ik0gMzUuMzksMjgyLjMzIEwgMjkuODQsMjg0LjYyIi8+PHBhdGggZD0iTSAyNy40NCwyNTguOTIgTCAyMS42NCwyNjAuNDciLz48cGF0aCBkPSJNIDIyLjYyLDIzNC42NyBMIDE2LjY3LDIzNS40NSIvPjxwYXRoIGQ9Ik0gMjEuMDAsMjEwLjAwIEwgMTUuMDAsMjEwLjAwIi8+PHBhdGggZD0iTSAyMi42MiwxODUuMzMgTCAxNi42NywxODQuNTUiLz48cGF0aCBkPSJNIDI3LjQ0LDE2MS4wOCBMIDIxLjY0LDE1OS41MyIvPjxwYXRoIGQ9Ik0gMzUuMzksMTM3LjY3IEwgMjkuODQsMTM1LjM4Ii8+PHBhdGggZD0iTSA0Ni4zMiwxMTUuNTAgTCA0MS4xMywxMTIuNTAiLz48cGF0aCBkPSJNIDYwLjA2LDk0Ljk0IEwgNTUuMzAsOTEuMjkiLz48cGF0aCBkPSJNIDc2LjM2LDc2LjM2IEwgNzIuMTEsNzIuMTEiLz48cGF0aCBkPSJNIDk0Ljk0LDYwLjA2IEwgOTEuMjksNTUuMzAiLz48cGF0aCBkPSJNIDExNS41MCw0Ni4zMiBMIDExMi41MCw0MS4xMyIvPjxwYXRoIGQ9Ik0gMTM3LjY3LDM1LjM5IEwgMTM1LjM4LDI5Ljg0Ii8+PHBhdGggZD0iTSAxNjEuMDgsMjcuNDQgTCAxNTkuNTMsMjEuNjQiLz48cGF0aCBkPSJNIDE4NS4zMywyMi42MiBMIDE4NC41NSwxNi42NyIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTUyIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsNTguMDAgMzYyLjAwLDIxMC4wMCAyMTAuMDAsMzYyLjAwIDU4LjAwLDIxMC4wMCIvPgogIDxwb2x5Z29uIHBvaW50cz0iMzE3LjQ4LDEwMi41MiAzMTcuNDgsMzE3LjQ4IDEwMi41MiwzMTcuNDggMTAyLjUyLDEwMi41MiIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTA2Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTAuMDAsMTA0LjAwIDI4NC45NSwxMzUuMDUgMzE2LjAwLDIxMC4wMCAyODQuOTUsMjg0Ljk1IDIxMC4wMCwzMTYuMDAgMTM1LjA1LDI4NC45NSAxMDQuMDAsMjEwLjAwIDEzNS4wNSwxMzUuMDUiLz4KICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIyMTAiIHI9IjY1Ii8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjEwIiByPSI0OCIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjIxMCIgcj0iMTgiLz4KICA8Y2lyY2xlIGN4PSIyMTAuMDAiIGN5PSI1OC4wMCIgcj0iMTQiLz4KICA8Y2lyY2xlIGN4PSIzNjIuMDAiIGN5PSIyMTAuMDAiIHI9IjE0Ii8+CiAgPGNpcmNsZSBjeD0iMjEwLjAwIiBjeT0iMzYyLjAwIiByPSIxNCIvPgogIDxjaXJjbGUgY3g9IjU4LjAwIiBjeT0iMjEwLjAwIiByPSIxNCIvPgo8L3N2Zz4K");
+}
+.RpUpdate #update-world::before { top: 28%; rotate: 12deg; }
+.RpUpdate #update-return::before { top: -100px; }
+.RpUpdate #update-return::after { bottom: -160px; }
+.RpUpdate #update-roadmap::before { top: 140px; left: -145px; }
+.RpUpdate #update-roadmap::after { bottom: -110px; rotate: -12deg; }
+
+/* Дополнительный круг у каждого шага делает фон плотнее между крупными узорами. */
+.RpUpdate .Section--feature .Step { position: relative; isolation: isolate; }
+.RpUpdate .Section--feature .Step::before {
+  content: "";
+  position: absolute;
+  width: var(--update-step-circle-size);
+  aspect-ratio: 1;
+  right: -65px;
+  bottom: -70px;
+  rotate: 14deg;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--role-accent);
+  opacity: var(--update-circle-opacity);
+  -webkit-mask: var(--update-circle-secondary) center / contain no-repeat;
+  mask: var(--update-circle-secondary) center / contain no-repeat;
+}
+.RpUpdate .Section--feature .Step--reverse::before {
+  right: auto;
+  bottom: auto;
+  left: -75px;
+  top: -35px;
+  rotate: -28deg;
+  -webkit-mask-image: var(--update-circle-primary);
+  mask-image: var(--update-circle-primary);
+}
+
+/* 04. Основные главы заметнее дополнений благодаря Banner и медиа. */
+.RpUpdate .Section--feature { max-width: none; margin: 0; padding-block: 40px; background: color-mix(in srgb, var(--role-accent) 7%, var(--role-bg)); }
+.RpUpdate .Section--feature .Banner { margin-bottom: 26px; min-height: 104px; padding: 18px 126px 18px 20px; }
+.RpUpdate .Section--feature .Banner > h2 { border: 0; padding: 0; margin: 0; font-size: 25px; line-height: 1.25; }
+.RpUpdate .Section--feature .Banner-art { width: 104px; height: 104px; right: 0; top: 50%; bottom: auto; translate: 0 -60%; }
+.RpUpdate .Section--feature .Banner-art > .Icon { font-size: 88px; }
+.RpUpdate .Section--feature .Banner > p { margin-top: 6px; font-size: 13px; line-height: 1.4; }
+.RpUpdate .Section--feature .Step { gap: 24px; margin: 26px 0 0; }
+.RpUpdate .Section--feature .Step + .Step { margin-top: 46px; }
+.RpUpdate .Section--feature .Step > :first-child > h3 { font-size: 22px; line-height: 1.3; }
+.RpUpdate .Section--feature .Step p:first-child { margin-top: 0; }
+.RpUpdate .Section--feature .Step p:last-child { margin-bottom: 0; }
+.RpUpdate .Section--feature .SectionHeading { margin-bottom: 24px; }
+.RpUpdate .Section--feature .SectionHeading h2 { border: 0; padding: 0; margin: 0; font-size: 27px; }
+.RpUpdate #update-details { margin: 46px 0 0; }
+.RpUpdate #update-details > h3 { font-size: 20px; margin-top: 0; }
+.RpUpdate .Document { font-size: 14px; line-height: 1.7; }
+.RpUpdate .Section--feature .Facts { margin: 26px 0 0; gap: 20px; }
+.RpUpdate .Section--feature .Facts dt { font-size: 16px; }
+.RpUpdate .Section--feature .Facts dd { font-size: 13px; line-height: 1.6; }
+.RpUpdate .Section--feature .Note { margin: 26px 0 0; }
+.RpUpdate .Section--feature .Step > .Note { margin: 0; }
+.RpUpdate .Document .Button { color: var(--role-text); background: color-mix(in srgb, var(--role-accent) 16%, var(--role-surface)); text-decoration: none; }
+.RpUpdate .Document .Button--primary { color: white; background: #367cc4; }
+.RpUpdate .Document .Hero-actions { margin-block: 28px; }
+.RpUpdate .Figure--screenshot { align-self: center; }
+.RpUpdate .Figure--cutout { height: 180px; }
+
+/* Шаг без иллюстрации занимает всю ширину, сохраняя общие отступы Step. */
+/* Отдельные границы сохраняют разметку при обработке Less на форуме. */
+.RpUpdate .Step > :only-child { grid-column-start: 1; grid-column-end: -1; }
+
+/* Панорама обрезается только при отображении; герб немного выходит за рамку. */
+.RpUpdate .Grid--city {
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  gap: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 10px 28px 28px 0;
+  align-self: center;
+  isolation: isolate;
+}
+.RpUpdate .Grid--city > .Figure { grid-column: 1; grid-row: 1; }
+.RpUpdate .Grid--city > .Figure--screenshot {
+  aspect-ratio: 3 / 2;
+  transform: rotate(-1deg);
+}
+.RpUpdate .Grid--city > .Figure--screenshot > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.RpUpdate .Grid--city > .Figure--crest {
+  width: 90px;
+  height: 120px;
+  justify-self: end;
+  align-self: end;
+  transform: translate(26px,24px) rotate(2deg);
+  z-index: 1;
+}
+
+
+/* Перекрывающиеся снимки: два дополнительных кадра позади, последний — главный.
+   Отступ --screenshot-peek задаёт видимую часть задних кадров по вертикали. */
+.RpUpdate .Grid--screenshots {
+  --screenshot-peek: 52px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  grid-template-rows: var(--screenshot-peek) auto var(--screenshot-peek);
+  gap: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 8px;
+  align-self: center;
+  isolation: isolate;
+}
+.RpUpdate .Grid--screenshots > .Figure--screenshot {
+  grid-column: 1;
+  min-width: 0;
+  margin: 0;
+}
+.RpUpdate .Grid--screenshots > .Figure--screenshot:first-child {
+  grid-row: 1 / span 2;
+  width: 88%;
+  justify-self: start;
+  align-self: start;
+  transform: translateX(-6px) rotate(-5deg);
+  z-index: 1;
+}
+.RpUpdate .Grid--screenshots > .Figure--screenshot:nth-child(2) {
+  grid-row: 2 / span 2;
+  width: 88%;
+  justify-self: end;
+  align-self: end;
+  transform: translateX(6px) rotate(4deg);
+  z-index: 2;
+}
+.RpUpdate .Grid--screenshots > .Figure--screenshot:last-child {
+  grid-row: 2;
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+  transform: rotate(-.7deg);
+  z-index: 3;
+}
+
+
+/* План развития использует общий Timeline и текстурные Badge.
+   Соединение проходит позади кружков, даты правятся прямо в HTML. */
+.RpUpdate .Document .Timeline--roadmap { margin: 30px 0 0; background-repeat: no-repeat; background-size: 100% 100%; }
+.RpUpdate .Document .Timeline.Timeline--roadmap { padding-inline-start: 24px; }
+.RpUpdate .Document .Timeline.Timeline--roadmap > li {
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr);
+  align-items: start;
+  gap: 20px;
+  width: calc(100% - 36px);
+  padding: 8px 0;
+  margin: 0 auto 0 0;
+}
+.RpUpdate .Document .Timeline.Timeline--roadmap > li + li { margin-top: 18px; }
+.RpUpdate .Document .Timeline.Timeline--roadmap > li:nth-child(even) { margin-inline: auto 0; }
+/* Изогнутый пунктир рисует embed.js по фактическим координатам кружков. */
+.RpUpdate .Document .Timeline.Timeline--roadmap > li::before { display: none; }
+.RpUpdate .Document .Timeline.Timeline--roadmap > li > .Badge {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 0;
+  font-size: 20px;
+  margin-top: 8px;
+  background: transparent;
+  z-index: 1;
+}
+.RpUpdate .Timeline--roadmap > li > div { display: block; min-width: 0; padding: 0; border-radius: 0; background: transparent; }
+.RpUpdate .Timeline--roadmap h3 { margin: 4px 0 7px; font-size: 18px; line-height: 1.3; }
+.RpUpdate .Timeline--roadmap .SectionKicker { color: var(--role-muted); font-size: 10px; line-height: 1.3; font-weight: 400; letter-spacing: .3px; text-transform: none; }
+.RpUpdate .Timeline--roadmap p:not(.SectionKicker) { font-size: 12px; line-height: 1.6; }
+
+/* Порог именно для встроенной страницы, а не десктопной ширины путеводителя. */
+@media (min-width: 560px) {
+  .RpUpdate .Step { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); }
+  .RpUpdate .Step--reverse { grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); }
+  .RpUpdate .Step--reverse > :first-child { order: 2; }
+  .RpUpdate .Facts--three { --columns: 3; }
+  .RpUpdate #update-return .Facts--cards { --columns: 2; }
+}
+@media (max-width: 559px) {
+  .RpUpdate { --role-gutter: 18px; --update-circle-size: 270px; --update-step-circle-size: 200px; --update-circle-opacity: .05; }
+  .RpUpdate[data-theme="dark"] { --update-circle-opacity: .045; }
+  .RpUpdate .Hero--update { background-position: 70% center; }
+  .RpUpdate .Hero--update .Hero-inner { min-height: 440px; padding-block: 36px; }
+  .RpUpdate .Section--feature { padding-block: 32px; }
+  .RpUpdate .Step, .RpUpdate .Step--reverse { grid-template-columns: minmax(0,1fr); }
+  .RpUpdate .Step--reverse > :first-child { order: 0; }
+  .RpUpdate .Section--feature .Banner { padding-right: 100px; }
+  .RpUpdate .Section--feature .Banner > h2 { font-size: 23px; }
+  .RpUpdate .Section--feature .Banner-art { width: 84px; height: 84px; }
+  .RpUpdate .Section--feature .Banner-art > .Icon { font-size: 82px; }
+  .RpUpdate .Facts--three { --columns: 1; }
+  .RpUpdate .Document .Timeline.Timeline--roadmap { padding-inline-start: 12px; }
+  .RpUpdate .Document .Timeline.Timeline--roadmap > li { width: calc(100% - 24px); gap: 16px; }
+  .RpUpdate .Document .Timeline.Timeline--roadmap > li + li { margin-top: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { html.UpdateDocument { scroll-behavior: auto; } }
